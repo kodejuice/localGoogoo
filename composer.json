@@ -1,0 +1,30 @@
+{
+    "name": "localgoogle/localgoogle",
+    "description": "A Search Engine used for searching through offline websites.",
+    "type": "application",
+    "license": "MIT",
+    "keywords": [
+        "search",
+        "engine",
+        "local",
+        "team",
+        "developer",
+        "google",
+        "localgoogle",
+        "git"
+    ],
+    "authors": [ 
+        {
+            "name": "KodeJuice",
+            "email": "kodejuice@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.0.0",
+        "ext-mysqli": "*",
+        "league/climate": "^3.2"
+    },
+    "bin": ["bin/localgoogle"],
+    "version": "1.0.0"
+}

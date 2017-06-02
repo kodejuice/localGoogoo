@@ -1,0 +1,173 @@
+/*
+ * This file is part of the localGoogle project
+ *
+ * Copyright (c) 2017, Sochima Biereagu
+ * Under MIT License
+ */
+
+$image: "../images/localGoogle.png";
+
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+nav {
+    .navbar-brand {
+        margin-top: 6px;
+        margin-right: 20px;
+    }
+
+    form.form-inline {
+        margin: 10px;
+    }
+
+    #search_box {
+        box-shadow: 0 1px 2px #ccc;
+        color: #333;
+
+        &:hover, &:focus {
+            border-color: #ddd;
+            box-shadow: 0 1px 6px #ccc;
+            color: #333;
+        }
+    }
+}
+
+.container-center {
+    height: 185px;
+    text-align: center;
+}
+
+.container-center:before {
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+}
+
+div.m {
+    display: block;
+    vertical-align: middle;
+
+    div#title {
+        height: 130px;
+
+        background-image: url($image);
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    button.btn.btn-primary.btn-lg {
+        cursor: initial;
+
+        padding: 9px;
+        font-size: 14px;
+        width: 135px;
+
+        background: #f2f2f2;
+        color: #757575;
+        border-color: #fff;
+        
+        font-weight: bold;
+        @include border-radius(2px);
+        
+        &:hover {
+            color: #333;
+            box-shadow: 0 0px 3px #aaa;
+            border: 1px solid #bbb;
+        }
+    }
+
+    form {
+        margin-bottom: 90px;
+
+        div#search_buttons {
+            margin-top: 30px;
+        }
+    }
+}
+
+
+div.form-container {
+    $ContainerWidth: 280;
+    $ContainerHeight: 300;
+
+    display: block;
+
+    width: (($ContainerWidth * 2) / 1140) * 100%;
+    height: ($ContainerHeight)*1px;
+    min-width: $ContainerWidth * 1px;
+
+    margin: 40px auto;
+
+    color: #24272a;
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px solid #ccc;
+
+    form.form-indexSite {
+        input, button {
+            margin: 9px 0;
+        }
+
+        width: (($ContainerWidth)-9) * 1px;
+        margin: 10px auto;
+    }
+}
+
+.form-control.box {
+    height: auto;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    @include border-radius(3px);
+    padding: 10px;
+    font-size: 16px;
+}
+
+.col-md-6.col-md-offset-3 {
+    input {
+        @include border-radius(3px);
+        box-shadow: 0 1px 1px #ccc;
+    }
+
+    .form-control:focus, .form-control:hover {
+        border-color: #ddd;
+        box-shadow: 0 1px 8px #aaa;
+    }
+}
+
+
+// search results styling
+
+a.index-site-button {
+    margin-top: 12px;
+}
+
+a.result-link {
+    color: #1a0dab;
+    font-size: 17px;
+    display: inline-block;
+
+    &:visited {
+        color: #609;
+    }
+}
+
+small.results-count {
+    color: #888;
+}
+
+small.result-url {
+    color: green;
+    display: block;
+}

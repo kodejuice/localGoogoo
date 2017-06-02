@@ -1,0 +1,117 @@
+#!/usr/bin/env php
+<?php
+
+/*
+ * This file is part of the localGoogle project
+ *
+ * Copyright (c) 2017, Sochima Biereagu
+ * Under MIT License
+ */
+
+// Test user PHP version
+if (version_compare(PHP_VERSION, '7.0.0', '<')) {
+    // oops!
+
+    exit(
+<<<text
+
+Oops!, you seem to be using an older version of PHP,
+ localGoogle only works on PHP (>= 7)
+
+text
+    );
+}
+
+
+require __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__."/../php/inc/helpers.inc.php";
+
+use League\CLImate\CLImate;
+
+$usage = <<<text
+
+Usage: $argv[0] <command>
+
+<command>: 
+   config    Configures localgoogles' database information
+   crawl     Crawls/Index the specified website in yor database
+
+text;
+
+$climate = new CLImate;
+
+if (isset($argv[1])) {
+    $command = strtolower($argv[1]);
+
+    switch ($command) {
+        case 'config':
+            config();
+            break;
+
+        case 'crawl':
+        case '-c':
+            crawl();
+            break;
+
+        default:
+            exit("Invalid Command \n $usage");
+    }
+} else {
+    exit($usage);
+}
+
+
+// config
+function config()
+{
+    global $climate;
+
+    // create the config file if its not found
+    prepareConfigFile("../config.json");
+
+    // host
+    $host = $climate->input(PHP_EOL.'DB host (e.g localhost): ');
+    $host->defaultTo('localhost');
+
+    // user
+    $user = $climate->input(PHP_EOL.'DB username (e.g root): ');
+    $user->defaultTo('root');
+
+    // password
+    $pass = $climate->password(PHP_EOL.'DB password: ');
+
+    $host = $host->prompt();
+    $user = $user->prompt();
+    $pass = $pass->prompt();
+
+    echo "======================================".PHP_EOL;
+
+    $json = [
+        'DB_HOST' => $host,
+        'DB_USER' => $user,
+        'DB_PASSWORD' => $pass,
+        'DB_NAME' => 'localgoogle'
+    ];
+    $json = json_encode($json, JSON_PRETTY_PRINT);
+
+    $input = $climate->confirm("\nContinue? ".PHP_EOL.$json.PHP_EOL);
+
+    if ($input->confirmed()) {
+        file_put_contents("../config.json", $json);
+        echo PHP_EOL."localGoogle succcessfully configured!".PHP_EOL;
+    }
+}
+
+
+// crawl website
+function crawl()
+{
+    global $argv;
+
+    $sitename = ($argv[2] ?? '');
+    $siteurl = ($argv[3] ?? '');
+
+    $script = __DIR__."/../php/crawl.php";
+
+    passthru("php -f $script $argv[0] \"$sitename\" \"$siteurl\"");
+}
