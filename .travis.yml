@@ -9,7 +9,6 @@ install:
   - travis_retry composer update
 
 script:
-  - ./bin/localgoogle crawl
   - php php/inc/crawler.class.php
   - php php/inc/search.inc.php
   - php php/crawl.php
