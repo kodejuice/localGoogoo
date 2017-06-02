@@ -1,6 +1,6 @@
 <p align="center"> <img src="./assets/images/localgoogle.png" alt="localGoogle logo" border="0" /> </p>
 
-[![Build Status](https://img.shields.io/travis/kodejuice/localgoogle/master.svg?style=flat)](https://travis-ci.org/kodejuice/localgoogle)
+[![Build Status](https://travis-ci.org/kodejuice/localGoogle.svg?branch=master)](https://travis-ci.org/kodejuice/localgoogle)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7207601f08ef4ec58ab63841088142e2)](https://www.codacy.com?utm_source=git@github.com&amp;utm_medium=referral&amp;utm_content=kodejuice/localgoogle&amp;utm_campaign=Badge_Grade)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md)
 
