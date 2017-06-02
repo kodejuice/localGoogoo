@@ -1,7 +1,7 @@
 <p align="center"> <img src="./assets/images/localgoogle.png" alt="localGoogle logo" border="0" /> </p>
 
 [![Build Status](https://travis-ci.org/kodejuice/localGoogle.svg?branch=master)](https://travis-ci.org/kodejuice/localgoogle)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7207601f08ef4ec58ab63841088142e2)](https://www.codacy.com?utm_source=git@github.com&amp;utm_medium=referral&amp;utm_content=kodejuice/localgoogle&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/32667e5ee1bd414c8e4837f096485997)](https://www.codacy.com/app/kodejuice/localGoogle_2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kodejuice/localGoogle&amp;utm_campaign=Badge_Grade)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md)
 
 
@@ -30,6 +30,7 @@ $ cd localgoogle
 $ composer install
 ```
 <br>
+
 Make sure the `localgoogle` folder is placed somewhere under your local web document root. Your offline websites should also be under local web directory, localGoogle wont be able to crawl them if they're not accessible via the `http://` protocol.
 
 Configuration
