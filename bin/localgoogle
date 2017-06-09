@@ -97,7 +97,7 @@ function config()
     $input = $climate->confirm("\nContinue? ".PHP_EOL.$json.PHP_EOL);
 
     if ($input->confirmed()) {
-        file_put_contents("../config.json", $json);
+        file_put_contents(__DIR__."/../config.json", $json);
         echo PHP_EOL."localGoogle succcessfully configured!".PHP_EOL;
     }
 }
