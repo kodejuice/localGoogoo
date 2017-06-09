@@ -110,9 +110,9 @@ sql;
 
 $table2 = <<<sql
 CREATE TABLE IF NOT EXISTS pages(
-    page_website VARCHAR(255) NOT NULL,
-    page_url VARCHAR(255) NOT NULL,
-    page_title VARCHAR(255),
+    page_website VARCHAR(100) NOT NULL,
+    page_url VARCHAR(150) NOT NULL,
+    page_title VARCHAR(100),
     page_content TEXT NOT NULL,
     FULLTEXT idx(page_url, page_title, page_content),
     UNIQUE (page_url)) ENGINE=InnoDB;

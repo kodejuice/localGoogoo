@@ -36,6 +36,7 @@ Usage: $argv[0] <command>
    config    Configures localgoogles' database information
    crawl     Crawls/Index the specified website in yor database
 
+
 text;
 
 $climate = new CLImate;
