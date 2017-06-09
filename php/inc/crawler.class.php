@@ -24,7 +24,7 @@ class LGCrawler
 
     public $crawledPages = []; // holds all links crawled in all webpages
     public $tooLarge = false;
-    public $logFile = "./../log.txt";
+    public $logFile = __DIR__."/../../log.txt";
 
     private $onCompleteCallback = [];
     private $onCrawlCallback = [];

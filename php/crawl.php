@@ -35,11 +35,7 @@ if (isset($_SERVER['argc']) && isset($_SERVER['argv'])) {
     if (isInvalid($name, $url)) {
         exit("\n$usageText".PHP_EOL." Invalid URL or Website name");
     }
-
-    // clear log file
-    if (file_exists($log = "../log.txt")) {
-        file_put_contents($log, "");
-    }
+    
 } else {
     exit("This script is meant to be run from the command line");
 }
@@ -48,6 +44,8 @@ if (isset($_SERVER['argc']) && isset($_SERVER['argv'])) {
 $name = $conn -> escape_string($name);
 $url = $conn -> escape_string(strtolower($url));
 
+// clear/create log file
+file_put_contents(__DIR__."/../log.txt", "");
 
 $crawler = new LGCrawler($name, $url, $conn);
 
@@ -71,7 +69,7 @@ $crawler->onComplete(
 
         $crawler->log($crawler->logFile, "Crawl complete!");
 
-        echo PHP_EOL.PHP_EOL."Process complete! ".secToTime($timeTook);
+        echo PHP_EOL.PHP_EOL."Process complete! ".secToTime($timeTook).PHP_EOL.PHP_EOL;
     }
 );
 
