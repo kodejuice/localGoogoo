@@ -99,7 +99,7 @@ function config()
 
     if ($input->confirmed()) {
         file_put_contents(__DIR__."/../config.json", $json);
-        echo PHP_EOL."localGoogle succcessfully configured!".PHP_EOL;
+        echo PHP_EOL."localGoogle succcessfully configured!".PHP_EOL.PHP_EOL;
     }
 }
 
