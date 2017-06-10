@@ -111,11 +111,12 @@ sql;
 $table2 = <<<sql
 CREATE TABLE IF NOT EXISTS pages(
     page_website VARCHAR(100) NOT NULL,
-    page_url VARCHAR(150) NOT NULL,
-    page_title VARCHAR(100),
+    page_url VARCHAR(250) NOT NULL,
+    page_title VARCHAR(250),
     page_content TEXT NOT NULL,
     FULLTEXT idx(page_url, page_title, page_content),
-    UNIQUE (page_url)) ENGINE=InnoDB;
+    UNIQUE (page_url)
+    ) Engine=MyISAM;
 
 sql;
 
