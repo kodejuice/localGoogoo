@@ -141,8 +141,8 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
         <!-- manage indexed sites -->
         <div role="tabpanel" class="tab-pane fade" id="manage">
 
-          <div class="row" style="margin-top: 30px;">
-            <div class="col-md-10 col-md-offset-1">  
+          <div class="row" style="margin: 0 auto;">
+            <div class="col-md-12">
 
               <table class="table table-bordered table-striped">
                 <tr>
