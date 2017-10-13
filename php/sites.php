@@ -81,30 +81,6 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
         <li role="presentation"><a href="#manage">Manage Indexed Websites</a></li>
       </ul>
 
-        <?php
-        // display log.txt content
-        // and clear the file
-        
-        if (file_exists("../log.txt")) {
-            $logs = file_get_contents("../log.txt");
-
-            if ($logs !== "") {
-                ?>
-
-           <div style="width: 40%;margin-top: 9px;" class="alert alert-info alert-dismissible" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-
-                <?php echo nl2br($logs); ?>
-           </div>
-
-        <?php
-            file_put_contents("../log.txt", "");
-            }
-        }
-        ?>
-
       <!-- Tab panes -->
       <div class="tab-content">
         <!-- add new site -->
