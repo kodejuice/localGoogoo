@@ -1,4 +1,4 @@
-<p align="center"> <img src="./assets/images/localgoogle.png" alt="localGoogle logo" border="0" /> </p>
+<p align="center"> <img src="./assets/images/localGoogle.png" alt="localGoogle logo" border="0" /> </p>
 
 [![Build Status](https://travis-ci.org/kodejuice/localGoogle.svg?branch=master)](https://travis-ci.org/kodejuice/localGoogle)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/32667e5ee1bd414c8e4837f096485997)](https://www.codacy.com/app/kodejuice/localGoogle_2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kodejuice/localGoogle&amp;utm_campaign=Badge_Grade)
