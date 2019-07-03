@@ -57,21 +57,14 @@ count;
 
 
     if (!$results) {
-        // invalid query or no result
+      // invalid query or no result
         // try different search technique
-
         $sqlQuery = "SELECT page_url, page_title, page_content FROM pages WHERE page_content";
+
         $words = explode(" ", $query);
-
-        $query_no_limit = '';
-
         for ($i = 0; $i < $count = count($words); $i += 1) {
             if ($i === $count - 1) { // last loop
-                $sqlQuery .= " LIKE '%$words[$i]%'";
-
-                $query_no_limit = $searchQuery;
-
-                $sqlQuery .= " LIMIT $startAt, 10";
+                $sqlQuery .= " LIKE '%$words[$i]%' LIMIT $startAt, 10";
             } else {
                 $sqlQuery .= " LIKE '%$words[$i]%' OR page_content";
             }
@@ -81,8 +74,16 @@ count;
         $results = $conn->query($sqlQuery);
         $queryTime = microtime(true) - $queryTime; // total time took
 
+
         // fetch total rows
-        $allResults = $conn->query($query_no_limit);
+        // same query without LIMIT
+        $qry = "SELECT page_url, page_title, page_content FROM pages WHERE page_content";
+        for ($i = 0; $i < $count = count($words); $i += 1) {
+            if ($i === $count - 1) $qry .= " LIKE '%$words[$i]%';";
+            else $qry .= " LIKE '%$words[$i]%' OR page_content";
+        }
+
+        $allResults = $conn->query($qry);
     }
 
 

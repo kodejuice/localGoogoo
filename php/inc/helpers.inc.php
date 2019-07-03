@@ -109,7 +109,7 @@ function isInvalid($name, $url)
 
 /* crawl.php, sites.php */
 
-// convert seconds to <seconds>(seconds|minutes|hours)
+// convert seconds to (seconds|minutes|hours)
 function secToTime($s)
 {
     if ($s === "incomplete") {

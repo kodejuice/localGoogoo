@@ -54,6 +54,10 @@ text;
     exit($str);
 }
 
+/////////////////////
+// Create database //
+/////////////////////
+
 $database = $conn->escape_string($DB_NAME); // database name, extracted from $json
 
 $sql = "CREATE DATABASE IF NOT EXISTS ".$database;
@@ -94,6 +98,11 @@ sql
 }
 
 $conn->select_db($database);
+
+
+///////////////////
+// Create tables //
+///////////////////
 
 // create tables if not exists :)
 $table1 = <<<sql
