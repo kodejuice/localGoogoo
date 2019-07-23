@@ -106,15 +106,14 @@ class LGCrawler
         // remove queries
         extract(parse_url($url));
         $path = isset($path) ? $path : "/";
-        $url = strtolower("$scheme://$host$path");
+        $url = ("$scheme://$host$path");
 
-        // if url is not 200 or isn't html, dont crawl
+        // if url is not 200 or isn't html or already cralwed, dont crawl
         if (!($fileContent = $this->getPageContent($url)) || !$this->isHTML($fileContent) || in_array($url, $crawledPages)) {
             return;
         }
 
-        // add `$url` to database first,
-        // before we crawl the links in its content
+        // add current page to database,
         if (!in_array($url, $crawledPages)) {
             $this->addPageToDatabase($url, $fileContent);
             array_push($crawledPages, $url);
@@ -123,7 +122,8 @@ class LGCrawler
         // will hold all links in the the current page
         $links = [];
 
-        // get all links in `$url`s content
+        // store all links in `$url`s content
+        //  for later crawling
         $this->getLinks(
             $url, function ($pageURL) use ($fileContent, &$links, &$crawledPages, $url) {
 
@@ -135,53 +135,19 @@ class LGCrawler
                 // remove queries from url
                 extract(parse_url($pageURL));
                 $path = isset($path) ? $path : "/";
-                $pageURL = strtolower("$scheme://$host$path");
+                $pageURL = ("$scheme://$host$path");
 
-                if (!in_array($pageURL, $crawledPages)) {
-                
-                    // only add link/page to the database if its (not an external link {different host}, valid and is html)
-                    if ($this->isAlike($this->siteurl, $pageURL) && ($content = $this->getPageContent($pageURL))
-                        && $this->isHTML($content)
-                    ) {
-                        $this->addPageToDatabase($pageURL, $content);
-                        array_push($crawledPages, $pageURL); // add to crawled-pages list, prevent re-crawling
-
-                        // get links from this webpage and push it to the '$links' array for later crawling
-                        $this->getLinks(
-                            $pageURL, function ($link) use (&$links, &$crawledPages, $url) {
-
-                                // callback
-                                if (isset($this->onCrawlCallback[0])) {
-                                    $this->onCrawlCallback[0]();
-                                }
-
-                                // remove queries from url
-                                extract(parse_url($link));
-                                $path = isset($path) ? $path : "/";
-                                $link = strtolower("$scheme://$host$path");
-
-                                // only push link if its not crawled already,
-                                // and its not an external link
-                                if ($this->isAlike($this->siteurl, $link) && !in_array($link, $crawledPages)) {
-                                    array_push($links, $link);
-                                }
-                            }, $content  /* url content provided so as to reduce execution time */
-                        );
-                    }
+                if ($this->isAlike($this->siteurl, $pageURL) && !in_array($pageURL, $crawledPages)) {
+                    array_push($links, $pageURL);
                 }
-            }, $fileContent /* url content provided so as to reduce execution time */
+
+            }, $fileContent /* page content provided so this method wont need to fetch the content again */
         );
 
-        // callback
-        if (isset($this->onCrawlCallback[0])) {
-            $this->onCrawlCallback[0]();
-        }
-
-        // recurse
         // crawl all links in the `$links` array
         foreach ($links as $link) {
             if (!in_array($link, $crawledPages)) {
-                $this->_startCrawler(strtolower($link));
+                $this->_startCrawler($link);
             }
         }
     }
@@ -281,7 +247,7 @@ class LGCrawler
         foreach ($html->find("a") as $a) {
             $url = $this->rel2abs($a->href, $u);
             $enurl = urlencode($url);
-            
+
             if (!empty($url) && !array_key_exists($enurl, $found_urls) && $this->isAlike($this->siteurl, $url)) {
                 $found_urls[$enurl] = 1;
                 $callback($url);
