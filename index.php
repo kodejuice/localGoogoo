@@ -24,24 +24,27 @@
 
       <div class="container-center">
         <div class="m">
-          <div id="title"> <!--BG IMAGE ELM--> </div>
-          
+          <div class="home-header">
+            <div id="title"> <!--BG IMAGE ELM--> </div>
+            <div id="title-mobile">
+              <img style="border:none;margin:8px 0" height="56" src="assets/images/localGoogle.png" width="220" alt="localGoogoo"/>
+            </div>
+          </div>
+
           <div class="row">
             <div class="col-md-6 col-md-offset-3">
-              
               <form action="./php/search.php">
                 <div class="form-group">
-                  <input name="q" type="search" class="form-control input-lg" id="search_box">
+                  <input name="q" type="search" class="form-control input-lg home-search" id="search_box">
                 </div>
 
                 <div id="search_buttons">
-                  <button type="submit" class="btn btn-primary btn-lg">Search</button>
-                  <button type="submit" class="btn btn-primary btn-lg" name="lucky" title="Use Ctrl+Enter" value="true">I'm Feeling Lucky</button>
+                  <button type="submit" class="btn btn-primary btn-lg home-btn">Search</button>
+                  <button type="submit" class="btn btn-primary btn-lg home-btn" name="lucky" title="Use Ctrl+Enter" value="true">I'm Feeling Lucky</button>
                 </div>
+              </form>
 
-          </form>
-
-              <a href="./php/sites.php" class="btn btn-primary"> Manage Indexed Websites </a>
+              <a href="./php/sites.php" class="btn btn-outline-primary"> Manage Indexed Websites </a>
 
             </div><!-- /.col-md-6 col-md-offset-3 -->
           </div> <!-- /.row -->
@@ -102,17 +105,12 @@
 
         // focus input `onkeypress`
         $(document).keypress(function(e) {
-
           if (!input.is(":focus")) {
-
             var v = String.fromCharCode(e.which);
             if (v.match(/[a-z0-9]/i)) {
-              input.val(input.val() + v);
+              input.focus();
             }
-
-            input.focus();
           }
-
         });
 
 

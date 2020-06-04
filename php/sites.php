@@ -75,7 +75,6 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
     </div>
 
     <div class="container remodal-bg">
-
       <ul class="nav nav-tabs">
         <li role="presentation" class="active"><a href="#add">Index new website</a></li>
         <li role="presentation"><a href="#manage">Manage Indexed Websites</a></li>
@@ -88,7 +87,7 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
         <div role="tabpanel" style="visibility: hidden;" class="tab-pane active" id="add">
 
           <!-- add new site -->
-          <div style="width: 40%;margin-top: 9px;" class="alert alert-info alert-dismissible" role="alert">
+          <div style="width: 40%;margin-top: 9px;" class="pc-only alert alert-info alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -102,12 +101,12 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
               <br>
 
               <label for="websiteName" class="sr-only">Website Name</label>
-              <input type="text" value="<?php echo $conn->escape_string($_POST['name']??'');?>" name="web_name" class="form-control box" placeholder="Website Name" required autofocus>
+              <input type="text" value="<?php echo $conn->escape_string($_POST['name']??'');?>" name="web_name" class="form-control" placeholder="Website Name" required autofocus>
 
               <label for="websiteUrl" class="sr-only">Website URL</label>
-              <input type="url" value="<?php echo $conn->escape_string($_POST['url']??'');?>" name="web_url" class="form-control box" placeholder="Website Url" required>
+              <input type="url" value="<?php echo $conn->escape_string($_POST['url']??'');?>" name="web_url" class="form-control" placeholder="Website Url" required>
 
-              <button id="start-btn" class="btn btn-lg btn-primary btn-block box" type="submit">Start Indexing</button>
+              <button id="start-btn" class="btn btn-outline-primary btn-block" type="submit">Start Indexing</button>
             </form>
 
           </div> <!-- /.form-container -->  
@@ -117,7 +116,7 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
         <!-- manage indexed sites -->
         <div role="tabpanel" class="tab-pane fade" id="manage">
 
-          <div class="row" style="margin: 0 auto;">
+          <div class="row table-responsive" style="margin: 0 auto;">
             <div class="col-md-12">
 
               <table class="table table-bordered table-striped">
@@ -159,23 +158,19 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
                   <td>
 
                   <form style="display: inline;" class="form-inline" action="sites.php" method="POST">
-                  
                     <input type="hidden" name="url" value="<?php echo $row[2]; ?>">
                     <input type
                     ="hidden" name="name" value="<?php echo $row[0]; ?>">
                     <button type="submit" class="btn btn-default re-index" title="Re-Index" role="button">
                       <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
                     </button>
-
                   </form>
 
                   <form style="display: inline;" class="form-inline" action="delete_site.php" method="POST">
-
                     <input type="hidden" name="website_name" value="<?php echo $row[0]; ?>">
                     <button type="submit" class="btn btn-default delete-site" title="Delete" role="button">
                       <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                     </button>
-
                   </form>
 
                   </td>

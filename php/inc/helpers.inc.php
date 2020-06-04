@@ -1,4 +1,8 @@
 <?php
+// TODO: write function to get substring of result without ommiting a closig <b>
+// TODO: add version tracker to all pages
+//
+
 /**
  * This file is part of the localGoogle project
  *

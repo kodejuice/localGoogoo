@@ -60,42 +60,44 @@ if (is_array($results)) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body style="max-width: 100%;">
+    <nav style="position: relative; margin-bottom: 10px;" class="navbar navbar-default navbar-fixed-top">
+      <div style="padding-left: 0;" class="container">
 
-  <nav style="position: relative; margin-bottom: 10px;" class="navbar navbar-default navbar-fixed-top">
-    <div style="padding-left: 0;" class="container">
+        <div class="row">
+          <div class="col-md-10 col-12">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="./../index.php">
+                <img width="110" height="27" src='../assets/images/localGoogle.png'/>
+              </a>
+            </div>
 
-      <div class="row">
-        <div class="col-md-10">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="./../index.php">
-              <img width="110" height="27" src='../assets/images/localGoogle.png'/>
-            </a>
+            <div id="navbar" class="collapse navbar-collapse">
+              <form action="" class="form-inline pc">
+                <div class="form-group">
+                  <input value="<?php echo $query; ?>" name="q" type="search" style="width: 400px;" class="form-control box input-lg" id="search_box">
+                </div>
+              </form>
+            </div><!--/.nav-collapse -->
           </div>
 
-          <div id="navbar" class="collapse navbar-collapse">
-            <form action="" class="form-inline">
-              <div class="form-group">
-                <input value="<?php echo $query; ?>" name="q" type="search" style="width: 400px;" class="form-control box input-lg" id="search_box">
-              </div>
-            </form>
-          </div><!--/.nav-collapse -->
+          <div class="col-md-2 add-site">
+            <a class="btn btn-outline-default index-site-button" href="sites.php" role="button">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            Add Websites
+            </a>
+          </div>
         </div>
-
-        <div class="col-md-2">
-          <a class="btn btn-default index-site-button" href="sites.php" role="button">
-          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-          Add Websites
-          </a>
-        </div>
+        <form action="" class="form-inline mobile-search">
+          <div class="form-group">
+            <input value="<?php echo $query; ?>" name="q" type="search" class="form-control box input-lg" id="search_box">
+          </div>
+        </form>
       </div>
+    </nav>
 
-    </div>
-  </nav>
+    <div class="container results-page">
 
-
-    <div class="container" style="width: 621px; margin-left: 12.3%;">
-      
         <?php
         if (!$results) {
             noResult();
@@ -125,14 +127,19 @@ if (is_array($results)) {
                 $url = $row[0];
                 $title = !empty($row[1]) ? $row[1] : "$url";
                 $content = $row[2];
-
-                $displayContent = getDisplayContent($content, $query); // filter content to get parts with our query
         ?>
             </b></b></b>
-            <a class='result-link' href='<?php echo $url ?>'> <span style="font-size: 18px;"> <?php echo $title ?> </span> </a>
-            <small class='result-url'><?php echo $url ?></small>
-            <span class='result-content'> <?php echo substr($displayContent, 0, 200) ?> ...</span>
-            <br><br>
+            <div class="result">
+              <a class='result-click-link' href='<?php echo $url ?>'>
+                <div class="result-header">
+                  <small class='result-url'><?php echo $url ?></small>
+                  <span class="result-title"> <?php echo $title ?> </span>
+                </div>
+              </a>
+              <div class="result-body">
+                <span class='result-content'> <?php echo substr($content, 0, 140) ?> ...</span>
+              </div>
+            </div>
         <?php
 
             }
@@ -141,20 +148,23 @@ if (is_array($results)) {
             displayPaging($totalRows);
         }
 
-       
         function noResult()
         {
             ?>
-
         <!-- no result -->
-        <h3> Your search - <b> <?php echo htmlentities($GLOBALS['query']); ?> </b> - did not match any document </b> </h3>
-        <br>
-        <p> None of the indexed pages contains your search query. </p>
+        <div style="font-size: 17px; padding: 7px;" class="result">
+          <h3 style="margin-bottom: 15px"> Your search - <b> <?php echo htmlentities($GLOBALS['query']); ?> </b> - did not match any document </b> </h3>
+          <p> Suggestions: </p>
+          <p> Make sure that all words are spelled correctly. </p>
+          <ul>
+            <li>Try different keywords.</li>
+            <li>Try more general keywords.</li>
+            <li>Try fewer keywords.</li>
+          </ul>
+        </div>
 
         <?php
-
         }
-
         ?>
 
       <br>
@@ -174,28 +184,29 @@ if (is_array($results)) {
     <script src="../assets/js/libs/bootstrap.min.js"></script>
     <script>
       $(function(){
+        var $form = $("form"),
 
-      var $form = $("form"),
-          input = $("input");
+        // select which input based on screen width
+        input = screen.width <= 700 ?
+          $(".mobile-search input#search_box")
+          : $(".pc input#search_box");
 
         // focus input `onkeypress`
         $(document).keypress(function(e) {
-
           if (!input.is(":focus")) {
-
             var v = String.fromCharCode(e.which);
             if (v.match(/[a-z0-9]/i)) {
-              input.val(input.val() + v);
+              input.focus();
+              // no need to set new input value
+              // its automatically done by the browser
             }
-
-            input.focus();
-          }          
-          input.focus();
+          }
         });
+
 
         // prevent whitespace search and empty input
         $form.on("submit", function(e) {
-          var $input = input,
+          var $input = $(this).find("input"),
           query = $input.val();
 
           if (!query || query.match(/^\s+$/)) {
@@ -206,7 +217,6 @@ if (is_array($results)) {
           // trim query string
           $input.val(query.replace(/\s+/g, ' '));
         });
-
       });
     </script>
   </body>
