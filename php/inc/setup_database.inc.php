@@ -38,6 +38,10 @@ if ($conn -> connect_error) {
     }
 
     $str = <<<text
+  <html>
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
      <big>
       <br> <br> <br>
       <fieldset>
@@ -49,6 +53,7 @@ if ($conn -> connect_error) {
       <br>
       <b> $conn->connect_error </b>
      </big>
+  </html>
 text;
 
     exit($str);
