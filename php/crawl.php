@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the localGoogle project
+ * This file is part of the localGoogoo project
  *
  * Copyright (c) 2017, Sochima Biereagu
  * Under MIT License

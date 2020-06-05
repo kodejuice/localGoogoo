@@ -1,12 +1,12 @@
 <?php
 /**
- * This file is part of the localGoogle project
+ * This file is part of the localGoogoo project
  *
  * Copyright (c) 2017, Sochima Biereagu
  * Under MIT License
  */
 
-/* this script creates the localGoogle database and its' tables if the're not yet created */
+/* this script creates the localGoogoo database and its' tables if the're not yet created */
 /* also makes the mysql $conn variable abailable for use */
 
 require_once "helpers.inc.php";
@@ -34,7 +34,7 @@ if (isset($_SERVER['argc']) && isset($_SERVER['argv'])) {
 
 if ($conn -> connect_error) {
     if ($isCMD) {
-        exit(PHP_EOL."Error establishing a MySQL database connection, run ".PHP_EOL." $ ./bin/localgoogle config".PHP_EOL);
+        exit(PHP_EOL."Error establishing a MySQL database connection, run ".PHP_EOL." $ ./bin/localgoogoo config".PHP_EOL);
     }
 
     $str = <<<text
@@ -45,9 +45,9 @@ if ($conn -> connect_error) {
      <big>
       <br> <br> <br>
       <fieldset>
-       <legend> LocalGoogle &lt; MySQL Connection Error &gt; </legend>
-         Error establishing a MySQL database connection, please setup localgoogle by <code>`cd`</code>ing into localgoogles directory and run <br>
-          <pre>$ ./bin/localgoogle config</pre>
+       <legend> LocalGoogoo &lt; MySQL Connection Error &gt; </legend>
+         Error establishing a MySQL database connection, please setup localgoogoo by <code>`cd`</code>ing into localgoogoo's directory and run <br>
+          <pre>$ ./bin/localgoogoo config</pre>
          and make sure MySQL is running on your computer.
       </fieldset>
       <br>
@@ -78,7 +78,7 @@ if (!@$conn->query($sql)) {
  $conn->error
 
  run
-  $ ./bin/localgoogle config
+  $ ./bin/localgoogoo config
 sql
         ); // exit
     }
@@ -93,9 +93,9 @@ sql
  <b> $conn->error </b>
 
 <br><br>
-<code>cd</code> into localgoogles directory and run
+<code>cd</code> into localgoogoo's directory and run
   <pre>
-  <code> $ ./bin/localgoogle config </code>
+  <code> $ ./bin/localgoogoo config </code>
   </pre>
   to rectify this.
 sql

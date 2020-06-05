@@ -48,7 +48,7 @@ if (is_array($results)) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo $query." - " ?> localGoogle search</title>
+    <title><?php echo $query." - " ?> localGoogoo search</title>
 
     <link rel="icon" href="../assets/images/favicon.ico">
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
@@ -68,7 +68,7 @@ if (is_array($results)) {
           <div class="col-md-10 col-12">
             <div class="navbar-header">
               <a class="navbar-brand" href="./../index.php">
-                <img width="110" height="27" src='../assets/images/localGoogle.png'/>
+                <img width="110" height="27" src='../assets/images/localGoogoo.png'/>
               </a>
             </div>
 
@@ -184,10 +184,11 @@ if (is_array($results)) {
     <script src="../assets/js/libs/bootstrap.min.js"></script>
     <script>
       $(function(){
+      	const MAX_MOBILE_VIEW_WIDTH = 700;
         var $form = $("form"),
 
         // select which input based on screen width
-        input = screen.width <= 700 ?
+        input = screen.width <= MAX_MOBILE_VIEW_WIDTH ?
           $(".mobile-search input#search_box")
           : $(".pc input#search_box");
 

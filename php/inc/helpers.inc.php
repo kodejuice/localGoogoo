@@ -4,14 +4,14 @@
 //
 
 /**
- * This file is part of the localGoogle project
+ * This file is part of the localGoogoo project
  *
  * Copyright (c) 2017, Sochima Biereagu
  * Under MIT License
  */
 
 /**
- * helpers functions used across localGoogle
+ * helpers functions used across localGoogoo
  */
 
 /*   search.php  */
@@ -149,7 +149,7 @@ function hasKey($arr, $key)
 }
 
 
-/* setup_database.php, localgoogle/bin */
+/* setup_database.php, localgoogoo/bin */
 
 function prepareConfigFile($config_file)
 {
@@ -166,7 +166,7 @@ function prepareConfigFile($config_file)
             'DB_HOST' => 'localhost',
             'DB_USER' => 'root',
             'DB_PASSWORD' => '',
-            'DB_NAME' => 'localgoogle'
+            'DB_NAME' => 'localgoogoo'
         ];
     
         file_put_contents($config_file, json_encode($data, JSON_PRETTY_PRINT));

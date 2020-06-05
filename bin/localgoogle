@@ -2,7 +2,7 @@
 <?php
 
 /*
- * This file is part of the localGoogle project
+ * This file is part of the localGoogoo project
  *
  * Copyright (c) 2017, Sochima Biereagu
  * Under MIT License
@@ -16,7 +16,7 @@ if (version_compare(PHP_VERSION, '7.0.0', '<')) {
 <<<text
 
 Oops!, you seem to be using an older version of PHP,
- localGoogle only works on PHP (>= 7)
+ localGoogoo only works on PHP (>= 7)
 
 text
     );
@@ -33,7 +33,7 @@ $usage = <<<text
 Usage: $argv[0] <command>
 
 <command>: 
-   config    Configures localgoogles' database information
+   config    Configures localgoogoos' database information
    crawl     Crawls/Index the specified website in yor database
 
 
@@ -91,7 +91,7 @@ function config()
         'DB_HOST' => $host,
         'DB_USER' => $user,
         'DB_PASSWORD' => $pass,
-        'DB_NAME' => 'localgoogle'
+        'DB_NAME' => 'localgoogoo'
     ];
     $json = json_encode($json, JSON_PRETTY_PRINT);
 
@@ -99,7 +99,7 @@ function config()
 
     if ($input->confirmed()) {
         file_put_contents(__DIR__."/../config.json", $json);
-        echo PHP_EOL."localGoogle succcessfully configured!".PHP_EOL.PHP_EOL;
+        echo PHP_EOL."localGoogoo succcessfully configured!".PHP_EOL.PHP_EOL;
     }
 }
 

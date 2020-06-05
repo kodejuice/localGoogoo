@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="description" content="A minimalistic search engine for searching locally saved websites.">
-    <title>localGoogle</title>
+    <title>localGoogoo</title>
 
     <link rel="icon" href="./assets/images/favicon.ico">
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
@@ -27,7 +27,7 @@
           <div class="home-header">
             <div id="title"> <!--BG IMAGE ELM--> </div>
             <div id="title-mobile">
-              <img style="border:none;margin:8px 0" height="56" src="assets/images/localGoogle.png" width="220" alt="localGoogoo"/>
+              <img style="border:none;margin:8px 0" height="56" src="assets/images/localGoogoo.png" width="220" alt="localGoogoo"/>
             </div>
           </div>
 

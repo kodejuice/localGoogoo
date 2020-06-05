@@ -1,5 +1,5 @@
 {
-    "name": "localgoogle/localgoogle",
+    "name": "localgoogoo/localgoogoo",
     "description": "A Search Engine used for searching through offline websites.",
     "type": "application",
     "license": "MIT",
@@ -10,7 +10,7 @@
         "team",
         "developer",
         "google",
-        "localgoogle",
+        "localgoogoo",
         "git"
     ],
     "authors": [ 
@@ -25,6 +25,6 @@
         "ext-mysqli": "*",
         "league/climate": "^3.2"
     },
-    "bin": ["bin/localgoogle"],
+    "bin": ["bin/localgoogoo"],
     "version": "1.0.0"
 }

@@ -25,7 +25,7 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>localGoogle - Crawl new site</title>
+    <title>localGoogoo - Crawl new site</title>
 
     <link rel="icon" href="../assets/images/favicon.ico">
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
@@ -46,7 +46,7 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
       <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="./../index.php">
-            <img width="113" height="27" src='../assets/images/localGoogle.png'/>
+            <img width="113" height="27" src='../assets/images/localGoogoo.png'/>
           </a>
         </div>
 
@@ -64,7 +64,7 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
     <div data-remodal-id="modal">
       <big align='right'> <b> <p id='timer'> 00:00:00 </p> </b> </big>
 
-      <h1> localGoogle WebCrawler </h1>
+      <h1> localGoogoo WebCrawler </h1>
       <div id="spinner-container"> </div>
       <br>
       <big>
@@ -92,7 +92,7 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
               <span aria-hidden="true">&times;</span>
             </button>
 
-            You can also index/crawl new websites via the command line, <code>./bin/localgoogle crawl <b>[website_name] [website_url]</b> </code>
+            You can also index/crawl new websites via the command line, <code>./bin/localgoogoo crawl <b>[website_name] [website_url]</b> </code>
           </div>
 
           <div class="form-container">

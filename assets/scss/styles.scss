@@ -1,12 +1,12 @@
 /*
- * This file is part of the localGoogle project
+ * This file is part of the localGoogoo project
  *
  * Copyright (c) 2017, Sochima Biereagu
  * Under MIT License
  */
 
-$image: "../images/localGoogle.png";
-$MAX_MOBILE_WIDTH: 700px;
+$image: "../images/localGoogoo.png";
+$MAX_MOBILE_WIDTH: 767px;
 
 @mixin border-radius($radius) {
     -webkit-border-radius: $radius;
@@ -316,6 +316,10 @@ span.result-title {
 span.result-content {
     display: block;
     overflow-x: hidden;
+    color: #4D5156 !important;
+    b {
+    	color: #5F6368 !important;
+    }
 }
 
 small.result-url {

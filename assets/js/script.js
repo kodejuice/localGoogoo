@@ -2,7 +2,7 @@
 /*global jQuery */
 
 /*
- * This file is part of the localGoogle project
+ * This file is part of the localGoogoo project
  *
  * Copyright (c) 2017, Sochima Biereagu
  * Under MIT License
@@ -93,7 +93,8 @@ $(document).ready(
             crawler.runningInBg = false;
 
             // start timer if not running
-            if (crawler.sec === 0) { startTimer();
+            if (crawler.sec === 0) {
+                startTimer();
             }
         }
 
@@ -184,7 +185,7 @@ $(document).ready(
 
                             $('em#site_url').html(weburl);
 
-                            function pagesCount(webname, weburl)
+                            var pagesCount = function pagesCount(webname, weburl)
                             {
                                 getPagesCount(
                                     webname, weburl, function (pages_count) {
