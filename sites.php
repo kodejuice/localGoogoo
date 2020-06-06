@@ -3,8 +3,8 @@
 
 const included = true;
 
-require "inc/helpers.inc.php";
-require "inc/setup_database.inc.php";
+require "php/inc/helpers.inc.php";
+require "php/inc/setup_database.inc.php";
 
 $websites = $conn->query(
     <<<sql
@@ -27,12 +27,12 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
 
     <title>localGoogoo - Crawl new site</title>
 
-    <link rel="icon" href="../assets/images/favicon.ico">
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/css/styles.min.css" rel="stylesheet">
-    <link href="../assets/libs/remodal/remodal.css" rel="stylesheet">
-    <link href="../assets/libs/remodal/remodal-default-theme.css" rel="stylesheet">
-    <link href="../assets/libs/g-spinner/css/gspinner.min.css" rel="stylesheet">    
+    <link rel="icon" href="assets/images/favicon.ico">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/styles.min.css" rel="stylesheet">
+    <link href="assets/libs/remodal/remodal.css" rel="stylesheet">
+    <link href="assets/libs/remodal/remodal-default-theme.css" rel="stylesheet">
+    <link href="assets/libs/g-spinner/css/gspinner.min.css" rel="stylesheet">    
     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -45,8 +45,8 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
     <nav style="position: relative;" class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="./../index.php">
-            <img width="113" height="27" src='../assets/images/localGoogoo.png'/>
+          <a class="navbar-brand" href="index.php">
+            <img width="113" height="27" src='assets/images/localGoogoo.png'/>
           </a>
         </div>
 
@@ -96,7 +96,7 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
           </div>
 
           <div class="form-container">
-            <form action="./start_crawler.php" method="POST" class="form-indexSite">
+            <form action="./php/start_crawler.php" method="POST" class="form-indexSite">
               <h2>Index New Website</h2>
               <br>
 
@@ -166,7 +166,7 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
                     </button>
                   </form>
 
-                  <form style="display: inline;" class="form-inline" action="delete_site.php" method="POST">
+                  <form style="display: inline;" class="form-inline" action="php/delete_site.php" method="POST">
                     <input type="hidden" name="website_name" value="<?php echo $row[0]; ?>">
                     <button type="submit" class="btn btn-default delete-site" title="Delete" role="button">
                       <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
@@ -210,13 +210,13 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
       ga('send', 'pageview');
    </script>
 
-    <script src="../assets/js/libs/jquery.min.js"></script>
-    <script src="../assets/js/libs/bootstrap.min.js"></script>
-    <script src="../assets/js/libs/jquery.hotkeys.js"></script>
+    <script src="assets/js/libs/jquery.min.js"></script>
+    <script src="assets/js/libs/bootstrap.min.js"></script>
+    <script src="assets/js/libs/jquery.hotkeys.js"></script>
 
-    <script src="../assets/libs/remodal/remodal.min.js"></script>
-    <script src="../assets/libs/g-spinner/js/g-spinner.min.js"></script>
+    <script src="assets/libs/remodal/remodal.min.js"></script>
+    <script src="assets/libs/g-spinner/js/g-spinner.min.js"></script>
 
-    <script src="../assets/js/script.js"></script>
+    <script src="assets/js/script.js"></script>
   </body>
 </html>

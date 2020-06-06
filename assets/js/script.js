@@ -119,7 +119,7 @@ $(document).ready(
         function getPagesCount(sitename, siteurl, fn) 
         {
             $.get(
-                'get_pages_count.php', {
+                './php/get_pages_count.php', {
                     sitename: sitename,
                     siteurl: siteurl
                 }
@@ -144,14 +144,14 @@ $(document).ready(
         // Ctrl+X - close crawler dialog
         $("html").bind(
             'keydown', "Ctrl+x", function () {
-                if (crawler.running && confirm("Close Dialog? Crawling/Indexing will continue at background")) {
-                    crawler.runningInBg = true;
-
-                    $dialog.close();
-                    $loader.gSpinner("hide");
-                } else {
-                    $dialog.close();
-                    $loader.gSpinner("hide");
+            		// check if already running in background
+            		if (!crawler.runningInBg) {
+				            if (crawler.running) {
+				            		alert("Crawling/Indexing will continue at background");
+				                crawler.runningInBg = true;
+				            }
+				            $dialog.close();
+				            $loader.gSpinner("hide");
                 }
             }
         );
@@ -169,10 +169,10 @@ $(document).ready(
                 var aj = $.ajax(
                     {
                         beforeSend: function () {
-
-                             // stop this request if theres an ongoing ajax request already
+                            // dont continue this request if theres an ongoing ajax request already
                             if (crawler.running) {
                                 openDialog($dialog, $loader);
+                                crawler.runningInBg = false;
                                 return false;
                             }
 
@@ -204,10 +204,9 @@ $(document).ready(
 
                             // start pages count timer
                             pagesCount(webname, weburl);
-
                         },
 
-                        url: "./start_crawler.php",
+                        url: "./php/start_crawler.php",
                         method: "post",
                         data: {
                             web_name: webname,

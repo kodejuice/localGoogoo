@@ -22,4 +22,4 @@ if (isset($post["website_name"])) {
 
 sleep(1);
 
-header("Location: sites.php?list");
+header("Location: ../sites.php?list");

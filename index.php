@@ -33,7 +33,7 @@
 
           <div class="row">
             <div class="col-md-6 col-md-offset-3">
-              <form action="./php/search.php">
+              <form action="./search.php">
                 <div class="form-group">
                   <input name="q" type="search" class="form-control input-lg home-search" id="search_box">
                 </div>
@@ -44,7 +44,7 @@
                 </div>
               </form>
 
-              <a href="./php/sites.php" class="btn btn-outline-primary"> Manage Indexed Websites </a>
+              <a href="./sites.php" class="btn btn-outline-primary"> Manage Indexed Websites </a>
 
             </div><!-- /.col-md-6 col-md-offset-3 -->
           </div> <!-- /.row -->
@@ -99,7 +99,7 @@
            input.val(query = query.replace(/\s+/g, ' '));
            
            if (query && !query.match(/^\s+$/)){
-              window.location = "./php/search.php?q="+query+"&lucky=1";
+              window.location = "search.php?q="+query+"&lucky=1";
            }
         });
 

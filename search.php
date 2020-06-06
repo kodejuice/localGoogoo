@@ -5,13 +5,13 @@ set_time_limit(60);
 
 const included = true;
 
-require_once "inc/helpers.inc.php";
-require_once "inc/setup_database.inc.php";
-require_once "inc/search.inc.php";
+require_once "php/inc/helpers.inc.php";
+require_once "php/inc/setup_database.inc.php";
+require_once "php/inc/search.inc.php";
 
 $get = $_GET; // shorthand access
 if (!isset($get['q']) || $get['q'] === "") {
-    header("Location: ../index.php");
+    header("Location: index.php");
 }
 
 // search query
@@ -50,9 +50,9 @@ if (is_array($results)) {
 
     <title><?php echo $query." - " ?> localGoogoo search</title>
 
-    <link rel="icon" href="../assets/images/favicon.ico">
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/css/styles.min.css" rel="stylesheet">
+    <link rel="icon" href="assets/images/favicon.ico">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/styles.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -67,8 +67,8 @@ if (is_array($results)) {
         <div class="row">
           <div class="col-md-10 col-12">
             <div class="navbar-header">
-              <a class="navbar-brand" href="./../index.php">
-                <img width="110" height="27" src='../assets/images/localGoogoo.png'/>
+              <a class="navbar-brand" href="index.php">
+                <img width="110" height="27" src='assets/images/localGoogoo.png'/>
               </a>
             </div>
 
@@ -180,11 +180,11 @@ if (is_array($results)) {
       ga('send', 'pageview');
     </script>
 
-    <script src="../assets/js/libs/jquery.min.js"></script>
-    <script src="../assets/js/libs/bootstrap.min.js"></script>
+    <script src="assets/js/libs/jquery.min.js"></script>
+    <script src="assets/js/libs/bootstrap.min.js"></script>
     <script>
       $(function(){
-      	const MAX_MOBILE_VIEW_WIDTH = 700;
+      	const MAX_MOBILE_VIEW_WIDTH = 767;
         var $form = $("form"),
 
         // select which input based on screen width
