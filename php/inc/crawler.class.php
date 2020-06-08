@@ -46,7 +46,7 @@ class LGCrawler
         $this->SQLConn = $SQLConn;
 
         // insert website details into database before we start crawling
-        // if details exist, get last indexed url
+        // if details exist, get last indexed url ($this->lastIndexedURL)
         $this->insertSiteInToDB();
     }
 
@@ -91,6 +91,7 @@ class LGCrawler
     /**
      * Crawler Method,
      *  crawls the given url and adds the pages to the database
+     *  recusively calls itself on all links found on a page
      */
     private function _startCrawler($url = null)
     {
