@@ -82,7 +82,7 @@ class LGCrawler
 
         $start = time();
 
-        $this->_startCrawler($this->lastIndexedURL);
+        $this->runCrawler($this->lastIndexedURL);
 
         // crawl complete
         $this->onCompleteCallback[0](time() - $start);
@@ -93,7 +93,7 @@ class LGCrawler
      *  crawls the given url and adds the pages to the database
      *  recusively calls itself on all links found on a page
      */
-    private function _startCrawler($url = null)
+    private function runCrawler($url = null)
     {
         $url = (!$url)? $this->siteurl :$url;
 
@@ -148,7 +148,7 @@ class LGCrawler
         // crawl all links in the `$links` array
         foreach ($links as $link) {
             if (!in_array($link, $crawledPages)) {
-                $this->_startCrawler($link);
+                $this->runCrawler($link);
             }
         }
     }
