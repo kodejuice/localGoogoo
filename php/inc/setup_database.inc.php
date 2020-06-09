@@ -127,8 +127,10 @@ CREATE TABLE IF NOT EXISTS pages(
     page_website VARCHAR(100) NOT NULL,
     page_url VARCHAR(250) NOT NULL,
     page_title VARCHAR(250),
+    page_headers TEXT NOT NULL,
+    page_emphasis TEXT NOT NULL,
     page_content TEXT NOT NULL,
-    FULLTEXT idx(page_url, page_title, page_content),
+    FULLTEXT idx(page_url, page_title, page_headers, page_emphasis, page_content),
     UNIQUE (page_url)
     ) Engine=MyISAM;
 
