@@ -140,13 +140,11 @@ function delete() {
         exit($usageText);
     }
     else {
-        $confirm = $climate->input("Delete '$argv[2]' (y, n): ");
-        $confirm->defaultTo('n');
+        $input = $climate->confirm("Delete '$argv[2]'");
 
-        $confirm = $confirm->prompt();
-
-        if ($confirm[0] != 'y')
-          return;
+        if (!$input->confirmed()) {
+            return;
+        }
 
         (function($msysql_conn, $website_name) {
             $name = $msysql_conn -> escape_string($website_name);
