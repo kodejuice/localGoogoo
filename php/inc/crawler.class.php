@@ -273,7 +273,7 @@ class LGCrawler
 
         // check if the html object has the 'find' method,
         // if it doesn't (false was returned) then the html content couldn't be parsed (too large)
-        // see the 'lib/simple_html_dom.php' script line 91
+        // see the 'lib/simple_html_dom.php' script line 113
         if (!is_callable([$dom, "find"], true)) {
             $this->tooLarge = true;
             return;
@@ -282,12 +282,16 @@ class LGCrawler
         $pageTitle = isset($dom->find("title")[0]) ? $dom -> find("title")[0] -> innertext() : "";
         $pageTitle = $conn -> escape_string($pageTitle);
 
-        $content = isset($dom -> find("body")[0]) ?  $dom -> find("body")[0]->innertext() : $content;
+        // get <body> tag from page content
+        $content = isset($dom -> find("body")[0])
+            ?  $dom -> find("body")[0]->innertext()
+            : $content;
 
-        $content = htmlspecialchars_decode($content); // decode html entities
-        $content = $this->stripTags($content); // strip out tags
+        // strip out tags and remove useless html elements
+        $content = $this->stripTags($content);
+
+        // escape strings
         $content = $conn -> escape_string($this->_trim($content));
-
         $link = $conn -> escape_string($link);
 
         $sql = <<<sql
@@ -298,7 +302,9 @@ sql;
         @$conn->query($sql);
 
 
-        // update info in the `website` table
+        ////////////////////////////////////////
+        // update info in the `website` table //
+        ////////////////////////////////////////
         $linksCount = (int) $conn -> query("SELECT COUNT(*) FROM pages WHERE page_website='$name'") -> fetch_row()[0];
         $date = date("jS F Y - l h:i:s A");
 
@@ -355,21 +361,57 @@ sql;
     }
 
     /**
+     * Remove html element from dom
+     * @param  [DOMObject]        $dom        html node object from 'simple_html_dom' lib
+     * @param  [Array[string]]    $selectors  selectors to be removed from dom
+     */
+    private function removeElem($dom, $selectors) {
+        foreach ($selectors as $selector) {
+    	    $elems = $dom->find($selector);
+    	    foreach ($elems as $E) {
+    	      $E->innertext = "";
+    	    }
+        }
+    }
+
+    /**
      * strip out tags from html document
-     * + (<script> with its contents)
      * 
-     * @param [string] $string HTML string
+     * @param [string]  $string  HTML string
      * 
-     * @return [string]          HTML
+     * @return [string]          HTML with tags stripped
      */
     private function stripTags($string)
     {
-        $string = preg_replace("#<script[^>]*>.*</script>#s", "", $string);
+        // remove tags that shouldnt appear in the search result
+        //  <script>, <style>
+        //  <header>, <nav>, <ul>
+        //  <aside>
+        //  <button>
+        //  <footer>
+        //  <div role='navigation'>
+        //  <div id='navbar'>
 
-        // remove htmlsentities
-        $string = preg_replace("#&[a-z]+;#", "", $string);
+        $dom = str_get_html($string);
+        $this->removeElem($dom, [
+          "script",
+          "style",
+          "header",
+          "nav",
+          "ul",
+          "div[role=navigation]",
+          "div#navbar",
+          "aside",
+          "button",
+          "footer",
+          "div.footer"
+        ]);
 
-        return strip_tags($string);
+        // get html as plaintext
+        //  this returns the html with tags stripped
+        $string = $dom->plaintext;
+
+        return $string;
     }
 
     /**
