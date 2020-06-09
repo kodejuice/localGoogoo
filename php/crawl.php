@@ -19,7 +19,7 @@ require_once "inc/crawler.class.php";
 
 // ran from CLI ?
 if (isset($_SERVER['argc']) && isset($_SERVER['argv'])) {
-    $usageText = "USAGE: $argv[1] crawl [website name] [website url]".PHP_EOL.PHP_EOL;
+    $usageText = "USAGE: $argv[1] crawl [website name] [website url]".PHP_EOL;
 
     if ($argc <> 4) {
         exit("\n$usageText");
@@ -33,7 +33,7 @@ if (isset($_SERVER['argc']) && isset($_SERVER['argv'])) {
     }
 
     if (isInvalid($name, $url)) {
-        exit("\n$usageText".PHP_EOL." Invalid URL or Website name".PHP_EOL.PHP_EOL);
+        exit("\n$usageText".PHP_EOL." Invalid URL or Website name".PHP_EOL);
     }
     
 } else {
