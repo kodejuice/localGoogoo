@@ -116,7 +116,7 @@ if (is_array($results)) {
              $query,
              $totalRows,
              $startAt;
-
+          
             if ($startAt === 0) {
                 echo "<small class='results-count'> $totalRows Result(s)  (".round($queryTime, 2)." seconds) </small> <br><br>";
             } else {
@@ -124,9 +124,9 @@ if (is_array($results)) {
             }
 
             while ($row = $data->fetch_row()) {
-                $url = $row[1];
-                $title = !empty($row[0]) ? $row[0] : "$url";
-                $content = $row[3];
+                $url = $row[0];
+                $title = !empty($row[1]) ? $row[1] : "$url";
+                $content = $row[2];
         ?>
             </b></b></b>
             <div class="result">
