@@ -129,27 +129,35 @@ function crawl() {
 
 // delete website
 function delete() {
-    global $argv;
+    global $argv, $climate;
 
     define('included', 1);
     require_once __DIR__."/../php/inc/setup_database.inc.php";
     // exposes the mysql connection, $conn
 
     if (!isset($argv[2])) {
-      $usageText = "\nUSAGE: $argv[0] $argv[1] [website name]".PHP_EOL.PHP_EOL;
-      exit($usageText);
+        $usageText = "\nUSAGE: $argv[0] $argv[1] [website name]".PHP_EOL.PHP_EOL;
+        exit($usageText);
     }
     else {
-      (function($msysql_conn, $website_name) {
-          $name = $msysql_conn -> escape_string($website_name);
+        $confirm = $climate->input("Delete '$argv[2]' (y, n): ");
+        $confirm->defaultTo('n');
 
-          $delete = "DELETE FROM pages WHERE page_website='$name';";
-          $delete .= "DELETE FROM websites WHERE site_name='$name';";
+        $confirm = $confirm->prompt();
 
-          @$msysql_conn->multi_query($delete);
+        if ($confirm[0] != 'y')
+          return;
 
-          echo "Done!";
-      })($conn, $argv[2]);
+        (function($msysql_conn, $website_name) {
+            $name = $msysql_conn -> escape_string($website_name);
+
+            $delete = "DELETE FROM pages WHERE page_website='$name';";
+            $delete .= "DELETE FROM websites WHERE site_name='$name';";
+
+            @$msysql_conn->multi_query($delete);
+
+            echo "Done!";
+        })($conn, $argv[2]);
     }
 }
 
