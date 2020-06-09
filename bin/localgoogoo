@@ -32,10 +32,11 @@ $usage = <<<text
 
 Usage: $argv[0] <command>
 
-<command>: 
-   config    Configures localgoogoos' database information
-   crawl     Crawls/Index the specified website in yor database
-
+<command>:
+   config        Configures localgoogoos' database information
+   crawl, -c     Crawls/Index an offline website
+   list, -l      List crawled websites
+   delete, -d    Delete a crawled website
 
 text;
 
@@ -54,6 +55,16 @@ if (isset($argv[1])) {
             crawl();
             break;
 
+        case 'list':
+        case '-l':
+            sites();
+            break;
+
+        case 'delete':
+        case '-d':
+            delete();
+            break;
+
         default:
             exit("Invalid Command \n $usage");
     }
@@ -63,8 +74,7 @@ if (isset($argv[1])) {
 
 
 // config
-function config()
-{
+function config() {
     global $climate;
 
     // create the config file if its not found
@@ -105,8 +115,7 @@ function config()
 
 
 // crawl website
-function crawl()
-{
+function crawl() {
     global $argv;
 
     $sitename = ($argv[2] ?? '');
@@ -116,3 +125,64 @@ function crawl()
 
     passthru("php -f $script $argv[0] \"$sitename\" \"$siteurl\"");
 }
+
+
+// delete website
+function delete() {
+    global $argv;
+
+    define('included', 1);
+    require_once __DIR__."/../php/inc/setup_database.inc.php";
+    // exposes the mysql connection, $conn
+
+    if (!isset($argv[2])) {
+      $usageText = "\nUSAGE: $argv[0] $argv[1] [website name]".PHP_EOL.PHP_EOL;
+      exit($usageText);
+    }
+    else {
+      (function($msysql_conn, $website_name) {
+          $name = $msysql_conn -> escape_string($website_name);
+
+          $delete = "DELETE FROM pages WHERE page_website='$name';";
+          $delete .= "DELETE FROM websites WHERE site_name='$name';";
+
+          @$msysql_conn->multi_query($delete);
+
+          echo "Done!";
+      })($conn, $argv[2]);
+    }
+}
+
+
+
+// list crawled websites
+function sites() {
+    global $argv;
+
+    define('included', 1);
+    require_once __DIR__."/../php/inc/setup_database.inc.php";
+    // exposes the mysql connection, $conn
+
+    $websites = $conn->query(
+        <<<sql
+      SELECT site_name, pages_count, site_url, last_index_date, crawl_time FROM websites
+      ORDER BY last_index_date DESC
+    sql
+    );
+
+    $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages")->fetch_row()[0];
+
+    echo "$allPagesCount Crawled pages\n\n";
+    $sites = 0;
+    while ($row = $websites->fetch_row()) {
+        $site = $row[0];
+        $pages = $row[1];
+        $url = $row[2];
+        $s = "$site ($pages pages) \n $url \n\n";
+        echo $s;
+        $sites += 1;
+    }
+
+    echo "$sites sites crawled\n";
+}
+
