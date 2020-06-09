@@ -1,0 +1,8 @@
+
+Usage: ./localgoogoo <command>
+
+<command>: 
+   config    Configures localgoogoo's database information
+   crawl     Crawls/Index an offline website
+   list      List crawled websites
+   delete    Delete a crawled website
