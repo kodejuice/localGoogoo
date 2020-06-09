@@ -144,19 +144,13 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
                             return htmlentities($v);
                         }, $row
                     );
-
-                    $c += 1; ?>
+                    $c += 1;
+                ?>
                 <tr>
                   <td><?php echo "$row[0] (".(($row[1]<2)?"$row[1] page":"$row[1] pages").") <br> <a href='$row[2]'>$row[2]</a>"; ?></td>
-
                   <td><?php echo $row[3]; ?></td>
-
+                  <td> <?php echo secToTime($row[4]); ?> </td>
                   <td>
-                    <?php echo secToTime($row[4]); ?>
-                  </td>
-
-                  <td>
-
                   <form style="display: inline;" class="form-inline" action="sites.php" method="POST">
                     <input type="hidden" name="url" value="<?php echo $row[2]; ?>">
                     <input type
@@ -165,25 +159,21 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
                       <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
                     </button>
                   </form>
-
                   <form style="display: inline;" class="form-inline" action="php/delete_site.php" method="POST">
                     <input type="hidden" name="website_name" value="<?php echo $row[0]; ?>">
                     <button type="submit" class="btn btn-default delete-site" title="Delete" role="button">
                       <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                     </button>
                   </form>
-
                   </td>
                 </tr>
-                <?php
 
+                <?php
                 }
-                
                 if ($c === 0) {
                     echo "<h3>No Website Indexed yet!</h3><br>";
                 } else {
                     $count = $allPagesCount->fetch_row()[0];
-
                     echo "<h4> ".(($count<2)?"$count Page Indexed":"$count Pages Indexed"). "</h4>";
                 }
 
