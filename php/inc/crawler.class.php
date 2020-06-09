@@ -408,10 +408,9 @@ sql;
         ]);
 
         // get html as plaintext
-        //  this returns the html with tags stripped
         $string = $dom->plaintext;
 
-        return $string;
+        return strip_tags($string);
     }
 
     /**
