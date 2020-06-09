@@ -92,7 +92,7 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
               <span aria-hidden="true">&times;</span>
             </button>
 
-            You can also index/crawl new websites via the command line, <code>./bin/localgoogoo crawl <b>[website_name] [website_url]</b> </code>
+            You can also crawl/index new websites via the command line, <code>./bin/localgoogoo crawl <b>[website_name] [website_url]</b> </code>
           </div>
 
           <div class="form-container">
