@@ -398,7 +398,7 @@ sql;
         foreach ($headers as $h) {
           $str .= preg_replace("#&[a-z0-9]+;#i", "", $h->plaintext) . " ";
         }
-        return $str;
+        return strip_tags($str);
     }
 
     /**
