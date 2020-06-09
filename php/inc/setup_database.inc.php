@@ -13,9 +13,9 @@ require_once "helpers.inc.php";
 
 $config_file = __DIR__."/../../config.json";
 
-// if (!defined('included')) {
-    // exit(PHP_EOL."Sorry, you cannot access this script directly".PHP_EOL);
-// }
+if (!defined('included')) {
+    exit(PHP_EOL."Sorry, you cannot access this script directly".PHP_EOL);
+}
 
 // creates config file if missing or corrupted
 prepareConfigFile($config_file);
@@ -137,7 +137,8 @@ $table2 = <<<sql
     FULLTEXT `emphasis` (`page_emphasis`),
     FULLTEXT `title` (`page_title`),
     FULLTEXT `content` (`page_content`),
-    FULLTEXT `url` (`page_url`)
+    FULLTEXT `url` (`page_url`),
+    FULLTEXT `fullsearch` (`page_title`, `page_url`, `page_content`, `page_headers`, `page_emphasis`)
   ) ENGINE = MyISAM;
 sql;
 
