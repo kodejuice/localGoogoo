@@ -287,16 +287,26 @@ class LGCrawler
             ?  $dom -> find("body")[0]->innertext()
             : $content;
 
-        // strip out tags and remove useless html elements
-        $content = $this->stripTags($content);
-
         // escape strings
         $content = $conn -> escape_string($this->_trim($content));
         $link = $conn -> escape_string($link);
 
+        // get dom instance here, so following methods
+        // dont need to call it again
+        $dom = str_get_html($content);
+
+        // get <strong>, <b>, <em> tags from page
+        $pageEmphasis = $this->getPageElems($dom, $content,"strong,em,b");
+
+        // get headers <h1>-<h6>
+        $pageHeaders = $this->getPageElems($dom, $content,"h1,h2,h3,h4,h5,h6");
+
+        // strip out tags and remove useless html elements
+        $content = $this->stripTags($content);
+
         $sql = <<<sql
-        INSERT INTO pages (page_website, page_url, page_title, page_content)
-        VALUES ('$name', '$link', '$pageTitle', '$content');
+        INSERT INTO pages (page_website, page_url, page_title, page_headers, page_emphasis, page_content)
+        VALUES ('$name', '$link', '$pageTitle', '$pageHeaders', '$pageEmphasis', '$content');
 sql;
 
         @$conn->query($sql);
@@ -375,6 +385,23 @@ sql;
     }
 
     /**
+     * Get htmltag content from html string
+     * @param   [DOMObject]
+     * @param   [string]    $content    html string
+     * @param   [string]    $tags       html tags to get
+     *
+     * @return [string]   string containing tag content
+     */
+    private function getPageElems($dom, $content, $tags) {
+        $headers = $dom->find($tags);
+        $str = "";
+        foreach ($headers as $h) {
+          $str .= preg_replace("#&[a-z0-9]+;#i", "", $h->plaintext) . " ";
+        }
+        return $str;
+    }
+
+    /**
      * strip out tags from html document
      * 
      * @param [string]  $string  HTML string
@@ -409,6 +436,7 @@ sql;
 
         // get html as plaintext
         $string = $dom->plaintext;
+        $string = preg_replace("#&[a-z0-9]+;#i", "", $string);
 
         return strip_tags($string);
     }
