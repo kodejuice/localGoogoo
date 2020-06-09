@@ -305,8 +305,8 @@ class LGCrawler
         $content = $this->stripTags($content);
 
         $sql = <<<sql
-        INSERT INTO pages (page_website, page_url, page_title, page_headers, page_emphasis, page_content)
-        VALUES ('$name', '$link', '$pageTitle', '$pageHeaders', '$pageEmphasis', '$content');
+        INSERT INTO pages (page_website, page_id, page_url, page_title, page_headers, page_emphasis, page_content)
+        VALUES ('$name', '$link', '$link', '$pageTitle', '$pageHeaders', '$pageEmphasis', '$content');
 sql;
 
         @$conn->query($sql);

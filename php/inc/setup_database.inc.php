@@ -13,9 +13,9 @@ require_once "helpers.inc.php";
 
 $config_file = __DIR__."/../../config.json";
 
-if (!defined('included')) {
-    exit(PHP_EOL."Sorry, you cannot access this script directly".PHP_EOL);
-}
+// if (!defined('included')) {
+    // exit(PHP_EOL."Sorry, you cannot access this script directly".PHP_EOL);
+// }
 
 // creates config file if missing or corrupted
 prepareConfigFile($config_file);
@@ -112,7 +112,7 @@ $conn->select_db($database);
 // create tables if not exists :)
 $table1 = <<<sql
 
-CREATE TABLE IF NOT EXISTS websites(
+CREATE TABLE IF NOT EXISTS websites (
     site_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     site_url VARCHAR(255) NOT NULL,
     site_name VARCHAR(255),
@@ -123,17 +123,22 @@ CREATE TABLE IF NOT EXISTS websites(
 sql;
 
 $table2 = <<<sql
-CREATE TABLE IF NOT EXISTS pages(
-    page_website VARCHAR(100) NOT NULL,
-    page_url VARCHAR(250) NOT NULL,
-    page_title VARCHAR(250),
-    page_headers TEXT NOT NULL,
-    page_emphasis TEXT NOT NULL,
-    page_content TEXT NOT NULL,
-    FULLTEXT idx(page_url, page_title, page_headers, page_emphasis, page_content),
-    UNIQUE (page_url)
-    ) Engine=MyISAM;
+  CREATE TABLE IF NOT EXISTS pages (
+    `page_title` VARCHAR(250),
+    `page_url` VARCHAR(250) NOT NULL ,
+    `page_website` VARCHAR(100) NOT NULL ,
+    `page_content` TEXT NOT NULL ,
+    `page_headers` TEXT NOT NULL ,
+    `page_emphasis` TEXT NOT NULL ,
+    `page_id` VARCHAR(255) NOT NULL ,
 
+    UNIQUE `id` (`page_id`),
+    FULLTEXT `headers` (`page_headers`),
+    FULLTEXT `emphasis` (`page_emphasis`),
+    FULLTEXT `title` (`page_title`),
+    FULLTEXT `content` (`page_content`),
+    FULLTEXT `url` (`page_url`)
+  ) ENGINE = MyISAM;
 sql;
 
 if (!$conn->query($table1) || !$conn->query($table2)) {
