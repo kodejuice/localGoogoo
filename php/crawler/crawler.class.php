@@ -14,7 +14,7 @@
  */
 
 require_once __DIR__."/../lib/simple_html_dom.php";
-require_once __DIR__."/helpers.inc.php";
+require_once __DIR__."/../inc/helpers.inc.php";
 
 class LGCrawler
 {

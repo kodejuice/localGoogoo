@@ -7,7 +7,7 @@ const included = true;
 
 require_once "php/inc/helpers.inc.php";
 require_once "php/inc/setup_database.inc.php";
-require_once "php/inc/search.inc.php";
+require_once "php/search/search.inc.php";
 
 $get = $_GET; // shorthand access
 if (!isset($get['q']) || $get['q'] === "") {
@@ -137,7 +137,7 @@ if (is_array($results)) {
                 </div>
               </a>
               <div class="result-body">
-                <span class='result-content'> <?php echo substr($content, 0, 140) ?> ...</span>
+                <span class='result-content'> <?php echo getDisplayContent($content, $query) ?> ...</span>
               </div>
             </div>
         <?php

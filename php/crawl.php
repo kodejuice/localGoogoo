@@ -14,7 +14,7 @@ const included = true;
 
 require_once "inc/helpers.inc.php";
 require_once "inc/setup_database.inc.php";
-require_once "inc/crawler.class.php";
+require_once "crawler/crawler.class.php";
 
 
 // ran from CLI ?
