@@ -8,6 +8,7 @@ const included = true;
 require_once "php/inc/helpers.inc.php";
 require_once "php/inc/setup_database.inc.php";
 require_once "php/search/search.inc.php";
+require_once "php/search/results_display.inc.php";
 
 $get = $_GET; // shorthand access
 if (!isset($get['q']) || $get['q'] === "") {
