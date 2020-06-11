@@ -13,6 +13,9 @@ if (!defined('included')) {
 // this script uses the MySQL full-text search technique
 // presented in the paper: https://www.researchgate.net/publication/268785605_Full-text_search_engine_using_MySQL
 
+
+define('RESULT_PER_PAGE', 10);
+
 /**
  * This function searches the database for our query
  *
@@ -27,6 +30,7 @@ function search($conn, $query, $startAt)
 {
     $query = $conn->escape_string($query);
     $startAt = $conn->escape_string($startAt);
+    $limit = RESULT_PER_PAGE;
 
     $U = 1.14;  // url relevance
     $T = 1.14;  // title relevance
@@ -44,7 +48,7 @@ function search($conn, $query, $startAt)
 	    FROM pages
 	    WHERE MATCH(`page_title`, `page_url`, `page_content`, `page_headers`, `page_emphasis`) AGAINST('$query' IN BOOLEAN MODE)
 	    ORDER BY relUrl*$U + relTitle*$T + relContent*$C + relHeaders*$H + relStrong*$S DESC
-	    LIMIT $startAt, 10;
+	    LIMIT $startAt, $limit;
 sql;
 
     // total query time
@@ -82,10 +86,11 @@ count;
  */
 function normal_search($conn, $query, $startAt) {
     $sqlQuery = "SELECT page_url, page_title, page_content FROM pages WHERE";
+    $limit = RESULT_PER_PAGE;
 
     $words = explode(" ", $query);
     for ($i = 0; $i < $count = count($words); $i += 1) {
-        if ($i === $count - 1) $sqlQuery .= " page_title LIKE '%$words[$i]%' LIMIT $startAt, 10;";
+        if ($i === $count - 1) $sqlQuery .= " page_title LIKE '%$words[$i]%' LIMIT $startAt, $limit;";
         else $sqlQuery .= " page_title LIKE '%$words[$i]%' OR ";
     }
 
