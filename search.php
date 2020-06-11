@@ -138,7 +138,7 @@ if (is_array($results)) {
                 </div>
               </a>
               <div class="result-body">
-                <span class='result-content'> <?php echo getDisplayContent($content, $query) ?> ...</span>
+                <span class='result-content'> <?php echo getDisplayContent($content, $query) ?> </span>
               </div>
             </div>
         <?php
@@ -154,7 +154,7 @@ if (is_array($results)) {
             ?>
         <!-- no result -->
         <div style="font-size: 17px; padding: 7px;" class="result">
-          <h3 style="margin-bottom: 15px"> Your search - <b> <?php echo htmlentities($GLOBALS['query']); ?> </b> - did not match any document </b> </h3>
+          <h3 style="margin-bottom: 15px">Your search - <b> <?php echo htmlentities($GLOBALS['query']); ?> </b> - did not match any document </b> </h3>
           <p> Suggestions: </p>
           <p> Make sure that all words are spelled correctly. </p>
           <ul>
