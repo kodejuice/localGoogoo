@@ -85,7 +85,7 @@ function normal_search($conn, $query, $startAt) {
 
     $words = explode(" ", $query);
     for ($i = 0; $i < $count = count($words); $i += 1) {
-        if ($i === $count - 1) $sqlQuery .= " page_title LIKE '%$words[$i]%';";
+        if ($i === $count - 1) $sqlQuery .= " page_title LIKE '%$words[$i]%' LIMIT $startAt, 10;";
         else $sqlQuery .= " page_title LIKE '%$words[$i]%' OR ";
     }
 
