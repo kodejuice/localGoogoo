@@ -125,8 +125,8 @@ function most_occuring($doc) {
 }
 
 
-// Implementation of the TFIDF algorithm
-// a slight variation, this one works for multiple query keywords
+// Implementation of the TFIDF algorithm (https://en.wikipedia.org/wiki/Tf–idf)
+// although with a slight difference, this one works for multiple query keywords
 
 function TF($t, $string) {
   return .5 * (1 + (freq($t, $string) / $GLOBALS['most_occuring']));
