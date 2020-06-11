@@ -418,6 +418,7 @@ sql;
         //  <footer>
         //  <div role='navigation'>
         //  <div id='navbar'>
+        //  <h1>-<h6>
 
         $dom = str_get_html($string);
         $this->removeElem($dom, [
@@ -431,7 +432,8 @@ sql;
           "aside",
           "button",
           "footer",
-          "div.footer"
+          "div.footer",
+          "h1,h2,h3,h4,h5,h6" // we've already taken the contents in `addPageToDatabase()`
         ]);
 
         // get html as plaintext
