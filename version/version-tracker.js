@@ -4,9 +4,7 @@
 //
 $(document).ready(function() {
   var current = $.get("./version/version-info.json"),
-      github = $.get("./version/version-info.json")
-      // github = $.get("http://raw.githubusercontent.com/kodejuice/localGoogle/master/composer.json")
-      // github = $.get("http://raw.githubusercontent.com/kodejuice/localGoogoo/master/version/version-info.json");
+      github = $.get("http://raw.githubusercontent.com/kodejuice/localGoogoo/master/version/version-info.json");
 
       current.then(function(curr) {
         github.then(function(repo) {
