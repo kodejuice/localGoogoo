@@ -9,7 +9,7 @@ If you have the offline version of websites like ([MDN](https://developer.mozill
 
 ## What is it
 
-localGoogoo is a minimalistic search engine that saves you the stress of manually going through your offline websites looking for information.
+localGoogoo is a minimal search engine that saves you the stress of manually going through your offline websites looking for information.
 
 With localGoogoo you just crawl/index these offline websites and just with a single search query you get the information you need.
 
