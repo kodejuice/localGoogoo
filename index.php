@@ -22,6 +22,14 @@
 
     <div class="container">
 
+      <!-- update alert -->
+      <div style="width: 40%; position: absolute; display: none;" class="pc-only alert alert-info alert-dismissible version" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        New version available!
+        <ul class='update-list'> </ul>
+        <a href="http://github.com/kodejuice/localGoogoo"> [Go to Repo] </a>
+      </div>
+
       <div class="container-center">
         <div class="m">
           <div class="home-header">
@@ -67,6 +75,7 @@
     <script src="./assets/js/libs/jquery.min.js"></script>
     <script src="./assets/js/libs/bootstrap.min.js"></script>
     <script src="./assets/js/libs/jquery.hotkeys.js"></script>
+    <script src="./version/version-tracker.js"></script>
 
     <script>
       $(function(){

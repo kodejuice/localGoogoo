@@ -58,6 +58,15 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
           </form>
         </div><!--/.nav-collapse -->
       </div>
+
+      <!-- update alert -->
+      <div style="width: 27%; position: absolute; display: none; right: 0; top: 10px;"
+          class="pc-only alert alert-info alert-dismissible version" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        New version available!
+        <ul class='update-list'> </ul>
+        <a href="http://github.com/kodejuice/localGoogoo"> [Go to Repo] </a>
+      </div>
     </nav>
 
     <!-- dialog and loading spinner -->
@@ -203,6 +212,7 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
     <script src="assets/js/libs/jquery.min.js"></script>
     <script src="assets/js/libs/bootstrap.min.js"></script>
     <script src="assets/js/libs/jquery.hotkeys.js"></script>
+    <script src="./version/version-tracker.js"></script>
 
     <script src="assets/libs/remodal/remodal.min.js"></script>
     <script src="assets/libs/g-spinner/js/g-spinner.min.js"></script>
