@@ -19,6 +19,8 @@ html,
 body {
     height: 100%;
     font-family: Roboto,HelveticaNeue,Arial,sans-serif !important;
+    display: flex;
+    flex-direction: column;
 }
 
 .mobile-search {
@@ -269,6 +271,10 @@ a.index-site-button {
 }
 
 
+div.Wrp {
+    flex: 1 0 auto;    
+}
+
 div.container.results-page {
     width: 621px;
     margin-left: 12.3%;
@@ -332,4 +338,32 @@ small.result-url {
 small.results-count {
     color: #888;
     margin-left: 5px;
+}
+
+div.search-footer {
+    flex-shrink: 0;
+    height: 50px;
+    color: rgba(0,0,0,.54);
+    background-color: rgb(242, 242, 242); 
+    border-top: 1px solid #ddd;
+
+    a {
+        color: #5F6368;
+    }
+
+    div.brand {
+        width: 100px;
+        display: inline-block;
+        border-right: 1px solid #ccc;
+    }
+
+    div.dev {
+        margin-left: 10px;
+        display: inline-block;
+    }
+
+    div.c {
+        margin-top: 5px;
+        margin-left: 14%;
+    }
 }

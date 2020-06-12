@@ -62,122 +62,133 @@ if (is_array($results)) {
     <![endif]-->
   </head>
   <body style="max-width: 100%;">
-    <nav style="position: relative; margin-bottom: 10px;" class="navbar navbar-default navbar-fixed-top">
-      <div style="padding-left: 0;" class="container">
+    <div class="Wrp">
+      <nav style="position: relative; margin-bottom: 10px;" class="navbar navbar-default navbar-fixed-top">
+        <div style="padding-left: 0;" class="container">
 
-        <div class="row">
-          <div class="col-md-10 col-12">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="index.php">
-                <img width="110" height="27" src='assets/images/localGoogoo.png'/>
-              </a>
-            </div>
-
-            <div id="navbar" class="collapse navbar-collapse">
-              <form action="" class="form-inline pc">
-                <div class="form-group">
-                  <input value="<?php echo $query; ?>" name="q" type="search" style="width: 400px;" class="form-control box input-lg" id="search_box">
-                </div>
-              </form>
-            </div><!--/.nav-collapse -->
-          </div>
-
-          <div class="col-md-2 add-site">
-            <a class="btn btn-outline-default index-site-button" href="sites.php" role="button">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            Add Websites
-            </a>
-          </div>
-        </div>
-        <form action="" class="form-inline mobile-search">
-          <div class="form-group">
-            <input value="<?php echo $query; ?>" name="q" type="search" class="form-control box input-lg" id="search_box">
-          </div>
-        </form>
-      </div>
-
-      <!-- update alert -->
-      <div style="width: 27%; position: absolute; display: none; right: 0; top: 10px;"
-          class="pc-only alert alert-info alert-dismissible version" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        New version available!
-        <ul class='update-list'> </ul>
-        <a href="http://github.com/kodejuice/localGoogoo"> [Go to Repo] </a>
-      </div>
-    </nav>
-
-    <div class="container results-page">
-
-        <?php
-        if (!$results) {
-            noResult();
-        } // no result
-
-        else {
-            displayResults($searchResult);
-        }
-        ?>
-
-        <?php
-        function displayResults($data)
-        {
-            global
-             $queryTime,
-             $query,
-             $totalRows,
-             $startAt;
-          
-            if ($startAt === 0) {
-                echo "<small class='results-count'> $totalRows Result(s)  (".round($queryTime, 2)." seconds) </small> <br><br>";
-            } else {
-                echo "<small class='results-count'> Page ".(($startAt/10) + 1)." of $totalRows Result(s)  (".round($queryTime, 2)." seconds) </small> <br><br>";
-            }
-
-            while ($row = $data->fetch_row()) {
-                $url = $row[0];
-                $title = !empty($row[1]) ? $row[1] : "$url";
-                $content = $row[2];
-        ?>
-            </b></b></b>
-            <div class="result">
-              <a class='result-click-link' href='<?php echo $url ?>'>
-                <div class="result-header">
-                  <small class='result-url'><?php echo $url ?></small>
-                  <span class="result-title"> <?php echo $title ?> </span>
-                </div>
-              </a>
-              <div class="result-body">
-                <span class='result-content'> <?php echo getDisplayContent($content, $query) ?> </span>
+          <div class="row">
+            <div class="col-md-10 col-12">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="index.php">
+                  <img width="110" height="27" src='assets/images/localGoogoo.png'/>
+                </a>
               </div>
+
+              <div id="navbar" class="collapse navbar-collapse">
+                <form action="" class="form-inline pc">
+                  <div class="form-group">
+                    <input value="<?php echo $query; ?>" name="q" type="search" style="width: 400px;" class="form-control box input-lg" id="search_box">
+                  </div>
+                </form>
+              </div><!--/.nav-collapse -->
             </div>
-        <?php
 
-            }
-
-            // display pagination
-            displayPaging($totalRows);
-        }
-
-        function noResult()
-        {
-            ?>
-        <!-- no result -->
-        <div style="font-size: 17px; padding: 7px;" class="result">
-          <h3 style="margin-bottom: 15px">Your search - <b> <?php echo htmlentities($GLOBALS['query']); ?> </b> - did not match any document </b> </h3>
-          <p> Suggestions: </p>
-          <p> Make sure that all words are spelled correctly. </p>
-          <ul>
-            <li>Try different keywords.</li>
-            <li>Try more general keywords.</li>
-            <li>Try fewer keywords.</li>
-          </ul>
+            <div class="col-md-2 add-site">
+              <a class="btn btn-outline-default index-site-button" href="sites.php" role="button">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              Add Websites
+              </a>
+            </div>
+          </div>
+          <form action="" class="form-inline mobile-search">
+            <div class="form-group">
+              <input value="<?php echo $query; ?>" name="q" type="search" class="form-control box input-lg" id="search_box">
+            </div>
+          </form>
         </div>
 
-        <?php
-        }
-        ?>
+        <!-- update alert -->
+        <div style="width: 27%; position: absolute; display: none; right: 0; top: 10px;"
+            class="pc-only alert alert-info alert-dismissible version" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          New version available!
+          <ul class='update-list'> </ul>
+          <a href="http://github.com/kodejuice/localGoogoo"> [Go to Repo] </a>
+        </div>
+      </nav>
 
-      <br>
+      <div class="container results-page">
+
+          <?php
+          if (!$results) {
+              noResult();
+          } // no result
+
+          else {
+              displayResults($searchResult);
+          }
+          ?>
+
+          <?php
+          function displayResults($data)
+          {
+              global
+               $queryTime,
+               $query,
+               $totalRows,
+               $startAt;
+            
+              if ($startAt === 0) {
+                  echo "<small class='results-count'> $totalRows Result(s)  (".round($queryTime, 2)." seconds) </small> <br><br>";
+              } else {
+                  echo "<small class='results-count'> Page ".(($startAt/10) + 1)." of $totalRows Result(s)  (".round($queryTime, 2)." seconds) </small> <br><br>";
+              }
+
+              while ($row = $data->fetch_row()) {
+                  $url = $row[0];
+                  $title = !empty($row[1]) ? $row[1] : "$url";
+                  $content = $row[2];
+          ?>
+              <div class="result">
+                <a class='result-click-link' href='<?php echo $url ?>'>
+                  <div class="result-header">
+                    <small class='result-url'><?php echo $url ?></small>
+                    <span class="result-title"> <?php echo $title ?> </span>
+                  </div>
+                </a>
+                <div class="result-body">
+                  <span class='result-content'> <?php echo getDisplayContent($content, $query) ?> </span>
+                </div>
+              </div>
+          <?php
+
+              }
+
+              // display pagination
+              displayPaging($totalRows);
+          }
+
+          function noResult()
+          {
+              ?>
+          <!-- no result -->
+          <div style="font-size: 17px; padding: 7px;" class="result">
+            <h3 style="margin-bottom: 15px">Your search - <b> <?php echo htmlentities($GLOBALS['query']); ?> </b> - did not match any document </b> </h3>
+            <p> Suggestions: </p>
+            <p> Make sure that all words are spelled correctly. </p>
+            <ul>
+              <li>Try different keywords.</li>
+              <li>Try more general keywords.</li>
+              <li>Try fewer keywords.</li>
+            </ul>
+          </div>
+          <?php
+          }
+          ?>
+        <br>
+      </div>
+    </div>
+
+    <div class="search-footer"> 
+      <div class="c">
+        <div class="brand">
+          <a href="https://github.com/kodejuice/localGoogoo">LocalGoogoo </a>
+        </div>
+
+        <div class="dev">
+        (c) 2020, <a href="https://twitter.com/kodejuice"> Sochima Biereagu </a>
+        </div>
+      </div>
     </div>
 
     <script>
