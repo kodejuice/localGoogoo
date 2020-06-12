@@ -9,9 +9,9 @@ $(document).ready(function() {
       current.then(function(curr) {
         github.then(function(repo) {
           if (typeof curr == "string") curr = JSON.parse(curr);
-          if (typeof curr == "string") repo = JSON.parse(repo);
+          if (typeof repo == "string") repo = JSON.parse(repo);
 
-          if (repo.version_number >= curr.version_number) {
+          if (repo.version_number > curr.version_number) {
             // theres been an update, inform user
 
             // display changes
