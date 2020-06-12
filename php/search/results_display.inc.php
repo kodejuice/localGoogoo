@@ -154,7 +154,7 @@ function relevance_score($string, $query, $document, $t=-1) {
   // add relevance score of left part of string
   // this is usually where the user begins to read
 	if ($t == -1) {
-		$left_substr = substr($string, strlen($string)/2);
+		$left_substr = substr($string, 0, strlen($string)/2);
 		$score += relevance_score($left_substr, $query, $content, 1)/2;
 	}
 
