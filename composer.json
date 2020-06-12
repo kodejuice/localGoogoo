@@ -23,7 +23,7 @@
     "require": {
         "php": ">=7.0.0",
         "ext-mysqli": "*",
-        "league/climate": "^3.2",
+        "league/climate": "^3.2"
     },
     "bin": ["bin/localgoogoo"],
     "version": "1.0.0"
