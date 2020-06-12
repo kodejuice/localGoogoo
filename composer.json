@@ -23,9 +23,7 @@
     "require": {
         "php": ">=7.0.0",
         "ext-mysqli": "*",
-        "elasticsearch/elasticsearch": "~7.0",
         "league/climate": "^3.2",
-        "monolog/monolog": "~1.0"
     },
     "bin": ["bin/localgoogoo"],
     "version": "1.0.0"
