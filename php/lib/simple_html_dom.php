@@ -1041,7 +1041,11 @@ class simple_html_dom_node
                 && ($this->is_utf8($text))) {
                 $converted_text = $text;
             } else {
-                $converted_text = iconv($sourceCharset, $targetCharset, $text);
+                // @kodjuice edit
+                // Fri 12th June 2020
+                if (function_exists('iconv')) {
+                    $converted_text = iconv($sourceCharset, $targetCharset, $text);
+                }
             }
         }
 
@@ -1755,8 +1759,13 @@ class simple_html_dom
                     // 'CP1251'/'ISO-8859-5' will be detected as
                     // 'CP1252'/'ISO-8859-1'. This will cause iconv to fail, in
                     // which case we can simply assume it is the other charset.
-                    if (!@iconv('CP1252', 'UTF-8', $this->doc)) {
-                        $encoding = 'CP1251';
+
+                    // @kodejuice edit
+                    // Fri 12th June 2020
+                    if (function_exists('iconv')) {
+                        if (!@iconv('CP1252', 'UTF-8', $this->doc)) {
+                            $encoding = 'CP1251';
+                        }
                     }
                 }
 
