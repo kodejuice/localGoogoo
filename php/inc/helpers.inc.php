@@ -10,7 +10,7 @@
  * helpers functions used across localGoogoo
  */
 
-/*   search.php  */
+/*   search/results_display.inc.php  */
 
 // adds backslash to regex meta characters in a string
 function escape_regex($r)
@@ -31,6 +31,8 @@ function escape_regex($r)
     return $nr;
 }
 
+
+/*   search.php  */
 
 // pagination
 function displayPaging($totalRows)
