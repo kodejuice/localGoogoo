@@ -151,10 +151,10 @@ function relevance_score($string, $query, $document, $t=-1) {
 
 	$score = ($sc * IDF($query, $document));
 
-  // add relevance score of left part of string
-  // this is usually where the user begins to read
+  // add relevance score of right part of string
+  //  cant tell why this works better than the left substring :(
 	if ($t == -1) {
-		$left_substr = substr($string, 0, strlen($string)/2);
+		$left_substr = substr($string, strlen($string)/2);
 		$score += relevance_score($left_substr, $query, $content, 1)/2;
 	}
 
