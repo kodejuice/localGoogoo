@@ -9,8 +9,9 @@ install:
   - travis_retry composer update
 
 script:
-  - php php/inc/crawler.class.php
-  - php php/inc/search.inc.php
+  - php php/crawler/crawler.class.php
+  - php php/search/search.inc.php
+  - php php/search/results_display.inc.php
   - php php/crawl.php
   - php php/start_crawler.php
 
