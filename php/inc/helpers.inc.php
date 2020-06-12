@@ -1,8 +1,4 @@
 <?php
-// TODO: write function to get substring of result without ommiting a closig <b>
-// TODO: add version tracker to all pages
-//
-
 /**
  * This file is part of the localGoogoo project
  *
@@ -40,9 +36,10 @@ function escape_regex($r)
 function displayPaging($totalRows)
 {
     global $startAt;
+    $results_per_page = 10;
 
-    $pages = round($totalRows / 10);
-    $curpage = $startAt/10 + 1;
+    $pages = round($totalRows / $results_per_page);
+    $curpage = $startAt/$results_per_page + 1;
 
     echo "<div style='text-align: center;' class='center'>"; // center pagination elm
 
