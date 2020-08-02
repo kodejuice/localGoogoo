@@ -151,10 +151,10 @@ $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages");
                     $row = array_map(
                         function ($v) {
                             return htmlentities($v);
-                        }, $row
+                        },
+                        $row
                     );
-                    $c += 1;
-                ?>
+                    $c += 1; ?>
                 <tr>
                   <td><?php echo "$row[0] (".(($row[1]<2)?"$row[1] page":"$row[1] pages").") <br> <a href='$row[2]'>$row[2]</a>"; ?></td>
                   <td><?php echo $row[3]; ?></td>

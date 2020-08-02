@@ -35,7 +35,6 @@ if (isset($_SERVER['argc']) && isset($_SERVER['argv'])) {
     if (isInvalid($name, $url)) {
         exit("\n$usageText".PHP_EOL." Invalid URL or Website name".PHP_EOL);
     }
-    
 } else {
     exit("This script is meant to be run from the command line");
 }

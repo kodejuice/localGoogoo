@@ -137,8 +137,7 @@ if (is_array($results)) {
               while ($row = $data->fetch_row()) {
                   $url = $row[0];
                   $title = !empty($row[1]) ? $row[1] : "$url";
-                  $content = $row[2];
-          ?>
+                  $content = $row[2]; ?>
               <div class="result">
                 <a class='result-click-link' href='<?php echo $url ?>'>
                   <div class="result-header">
@@ -151,7 +150,6 @@ if (is_array($results)) {
                 </div>
               </div>
           <?php
-
               }
 
               // display pagination

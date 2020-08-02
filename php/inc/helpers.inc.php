@@ -146,4 +146,3 @@ function prepareConfigFile($config_file)
         file_put_contents($config_file, json_encode($data, JSON_PRETTY_PRINT));
     }
 }
-

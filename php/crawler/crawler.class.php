@@ -33,7 +33,7 @@ class LGCrawler
 
     /**
      * Crawler constructor
-     * 
+     *
      * @param [string]   $sitename website name
      * @param [string]   $siteurl  website url
      * @param [resource] $SQLConn  mysql connection
@@ -52,7 +52,7 @@ class LGCrawler
 
     /**
      * method to log messages
-     * 
+     *
      * @param string $file the log file name
      * @param string $text the log message
      */
@@ -126,7 +126,8 @@ class LGCrawler
         // store all links in `$url`s content
         //  for later crawling
         $this->getLinks(
-            $url, function ($pageURL) use ($fileContent, &$links, &$crawledPages, $url) {
+            $url,
+            function ($pageURL) use ($fileContent, &$links, &$crawledPages, $url) {
 
                 // callback
                 if (isset($this->onCrawlCallback[0])) {
@@ -141,8 +142,8 @@ class LGCrawler
                 if ($this->isAlike($this->siteurl, $pageURL) && !in_array($pageURL, $crawledPages)) {
                     array_push($links, $pageURL);
                 }
-
-            }, $fileContent /* page content provided so this method wont need to fetch the content again */
+            },
+            $fileContent /* page content provided so this method wont need to fetch the content again */
         );
 
         // crawl all links in the `$links` array
@@ -155,10 +156,10 @@ class LGCrawler
 
     /**
      * convert relative url to absolute url
-     * 
+     *
      * @param [string] $rel  relative url
      * @param [string] $base base url
-     * 
+     *
      * @return [string]        absolute url
      */
     private function rel2abs($rel, $base)
@@ -258,10 +259,10 @@ class LGCrawler
 
     /**
      * method to add pages to the db as we crawl
-     * 
+     *
      * @param [string] $link    page url
      * @param [string] $content page content
-     * 
+     *
      * @return [boolean]        page added or not
      */
     private function addPageToDatabase($link, $content)
@@ -296,10 +297,10 @@ class LGCrawler
         $dom = str_get_html($content);
 
         // get <strong>, <b>, <em> tags from page
-        $pageEmphasis = $this->getPageElems($dom, $content,"strong,em,b");
+        $pageEmphasis = $this->getPageElems($dom, $content, "strong,em,b");
 
         // get headers <h1>-<h6>
-        $pageHeaders = $this->getPageElems($dom, $content,"h1,h2,h3,h4,h5,h6");
+        $pageHeaders = $this->getPageElems($dom, $content, "h1,h2,h3,h4,h5,h6");
 
         // strip out tags and remove useless html elements
         $content = $this->stripTags($content);
@@ -375,12 +376,13 @@ sql;
      * @param  [DOMObject]        $dom        html node object from 'simple_html_dom' lib
      * @param  [Array[string]]    $selectors  selectors to be removed from dom
      */
-    private function removeElem($dom, $selectors) {
+    private function removeElem($dom, $selectors)
+    {
         foreach ($selectors as $selector) {
-    	    $elems = $dom->find($selector);
-    	    foreach ($elems as $E) {
-    	      $E->innertext = "";
-    	    }
+            $elems = $dom->find($selector);
+            foreach ($elems as $E) {
+                $E->innertext = "";
+            }
         }
     }
 
@@ -392,20 +394,21 @@ sql;
      *
      * @return [string]   string containing tag content
      */
-    private function getPageElems($dom, $content, $tags) {
+    private function getPageElems($dom, $content, $tags)
+    {
         $headers = $dom->find($tags);
         $str = "";
         foreach ($headers as $h) {
-          $str .= preg_replace("#&[a-z0-9]+;#i", "", $h->plaintext) . " ";
+            $str .= preg_replace("#&[a-z0-9]+;#i", "", $h->plaintext) . " ";
         }
         return strip_tags($str);
     }
 
     /**
      * strip out tags from html document
-     * 
+     *
      * @param [string]  $string  HTML string
-     * 
+     *
      * @return [string]          HTML with tags stripped
      */
     private function stripTags($string)
@@ -447,7 +450,7 @@ sql;
      * check if string is html
      *
      * @param [string] $string string to check
-     * 
+     *
      * @return [boolean]         html or not
      */
     private function isHTML($string)
@@ -458,10 +461,10 @@ sql;
     /**
      * check if urls are alike
      * so as to prevent the crawler from exceeding its boundaries
-     * 
+     *
      * @param [string] $url1 original url
      * @param [string] $url2 test url
-     * 
+     *
      * @return [boolean]       alike or not
      */
     private function isAlike($url, $testUrl)
@@ -492,7 +495,7 @@ sql;
 
     /**
      * Takes a url and returns false (if its inaccessible) else it contents
-     * 
+     *
      * @param [string] $url url to fetch
      */
     private function getPageContent($url)
@@ -504,7 +507,7 @@ sql;
      * delete multiple whitespaces
      *
      * @param [string] $value string to trim
-     * 
+     *
      * @return [string]        trimmed string
      */
     private function _trim($str)

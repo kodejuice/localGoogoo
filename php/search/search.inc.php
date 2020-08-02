@@ -84,14 +84,18 @@ count;
 /**
  * plain mysql LIKE '%search%'
  */
-function normal_search($conn, $query, $startAt) {
+function normal_search($conn, $query, $startAt)
+{
     $sqlQuery = "SELECT page_url, page_title, page_content FROM pages WHERE";
     $limit = RESULT_PER_PAGE;
 
     $words = explode(" ", $query);
     for ($i = 0; $i < $count = count($words); $i += 1) {
-        if ($i === $count - 1) $sqlQuery .= " page_title LIKE '%$words[$i]%' LIMIT $startAt, $limit;";
-        else $sqlQuery .= " page_title LIKE '%$words[$i]%' OR ";
+        if ($i === $count - 1) {
+            $sqlQuery .= " page_title LIKE '%$words[$i]%' LIMIT $startAt, $limit;";
+        } else {
+            $sqlQuery .= " page_title LIKE '%$words[$i]%' OR ";
+        }
     }
 
     // total query time
@@ -103,8 +107,11 @@ function normal_search($conn, $query, $startAt) {
     // same query without LIMIT
     $qry = "SELECT page_id FROM pages WHERE";
     for ($i = 0; $i < $count = count($words); $i += 1) {
-        if ($i === $count - 1) $qry .= " page_title LIKE '%$words[$i]%';";
-        else $qry .= " page_title LIKE '%$words[$i]%' OR ";
+        if ($i === $count - 1) {
+            $qry .= " page_title LIKE '%$words[$i]%';";
+        } else {
+            $qry .= " page_title LIKE '%$words[$i]%' OR ";
+        }
     }
     $allResults = $conn->query($qry);
 
@@ -116,4 +123,3 @@ function normal_search($conn, $query, $startAt) {
     // just give up
     return null;
 }
-
