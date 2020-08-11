@@ -138,8 +138,8 @@ $table2 = <<<sql
     FULLTEXT `title` (`page_title`),
     FULLTEXT `content` (`page_content`),
     FULLTEXT `url` (`page_url`),
-    FULLTEXT `fullsearch` (`page_title`, `page_url`, `page_content`, `page_headers`, `page_emphasis`)
-  ) ENGINE = MyISAM;
+    FULLTEXT `fullsearch` (`page_title` (70), `page_url` (90), `page_content`, `page_headers`, `page_emphasis`)
+  ) ENGINE=InnoDB;
 sql;
 
 if (!$conn->query($table1) || !$conn->query($table2)) {
