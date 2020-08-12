@@ -55,7 +55,7 @@ function highlight_matches($string, $query)
     $qry_kwords = explode(" ", $query);
 
     foreach ($qry_kwords as $kwrd) {
-        if (preg_match("/\b".escape_regex($kwrd)."\b/i", $string, $m)) {
+        if (strlen($kwrd)>2 and preg_match("/\b".escape_regex($kwrd)."\b/i", $string, $m)) {
             $m = $m[0];
             $string = str_replace("$m", "<b>$m</b>", $string); // highlight keyword
         }
