@@ -51,6 +51,7 @@ function getDisplayContent($document, $query)
 //
 function highlight_matches($string, $query)
 {
+		$query = preg_replace("#[^a-z0-9]+#i", " ", $query); // split query by any non-alphanumberic character
     $qry_kwords = explode(" ", $query);
 
     foreach ($qry_kwords as $kwrd) {
