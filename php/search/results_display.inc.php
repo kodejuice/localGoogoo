@@ -51,13 +51,13 @@ function getDisplayContent($document, $query)
 //
 function highlight_matches($string, $query)
 {
-		$query = preg_replace("#[^a-z0-9]+#i", " ", $query); // split query by any non-alphanumberic character
+    $query = preg_replace("#[^a-z0-9]+#i", " ", $query); // split query by any non-alphanumberic character
     $qry_kwords = explode(" ", $query);
 
     foreach ($qry_kwords as $kwrd) {
         if (strlen($kwrd)>2 and preg_match("/\b".escape_regex($kwrd)."\b/i", $string, $m)) {
             $m = $m[0];
-            $string = str_replace("$m", "<b>$m</b>", $string); // highlight keyword
+            $string = preg_replace("#\b$m\b#", "<b>$m</b>", $string); // highlight keyword
         }
     }
 
