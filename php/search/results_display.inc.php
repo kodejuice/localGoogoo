@@ -107,6 +107,9 @@ function total_substrings($content)
 //
 function freq($q, $string)
 {
+    if (strlen($q) < 1) {
+        return 0;
+    }
     return substr_count(strtolower($string), strtolower($q));
 }
 
@@ -168,8 +171,9 @@ function relevance_score($string, $query, $document, $t=-1)
     // add relevance score of right part of string
     //  cant tell why this works better than the left substring :(
     if ($t == -1) {
-        $left_substr = substr($string, strlen($string)/2);
-        $score += relevance_score($left_substr, $query, $content, 1)/2;
+        $right_substr = substr($string, strlen($string)/2);
+        // $left_substr = substr($string, 0, strlen($string)/2);
+        $score += relevance_score($right_substr, $query, $document, 1)/2;
     }
 
     // add the readability score
