@@ -26,7 +26,7 @@ define('RESULT_PER_PAGE', 10);
  * @return [array]             search results
  */
 
-function search($conn, $query, $startAt)
+function search($conn, $query, $startAt=0)
 {
     $query = $conn->escape_string($query);
     $startAt = $conn->escape_string($startAt);
