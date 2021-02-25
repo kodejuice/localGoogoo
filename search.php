@@ -184,7 +184,7 @@ if (is_array($results)) {
         </div>
 
         <div class="dev">
-        (c) 2020, <a href="https://twitter.com/kodejuice"> Sochima Biereagu </a>
+        (c) <?php echo date('Y') ?>, <a href="https://twitter.com/kodejuice"> Sochima Biereagu </a>
         </div>
       </div>
     </div>
