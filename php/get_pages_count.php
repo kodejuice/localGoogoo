@@ -12,7 +12,7 @@
 
 const included = true;
 
-require_once "./inc/setup_database.inc.php";
+require_once __DIR__ . "/inc/setup_database.inc.php";
 
 if (isset($_GET['sitename']) && isset($_GET['siteurl'])) {
     $name = trim($conn->escape_string(urldecode($_GET['sitename'])));
