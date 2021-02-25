@@ -7,6 +7,8 @@
 
 If you have the offline version of websites like ([MDN](https://developer.mozilla.org/), [W3Schools](https://w3schools.com/), [PHP.net](https://php.net/), e.t.c), then this is a must have tool for you.
 
+> Check out <a href="https://github.com/kodejuice/localgoogoo-go"> localgoogoo-go </a>, a Go package that lets you use localGoogoo from the command line.
+
 ## What is it
 
 localGoogoo is a minimal search engine that saves you the stress of manually going through your offline websites looking for information.

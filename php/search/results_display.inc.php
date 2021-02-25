@@ -1,6 +1,6 @@
 <?php
 
-define('WINDOW_LEN', 144);
+define('WINDOW_LEN', 174);
 
 
 
@@ -154,6 +154,7 @@ function IDF($t, $D)
 }
 
 
+// TODO: improve this
 function relevance_score($string, $query, $document, $t=-1)
 {
     $keywords = explode(" ", $query);

@@ -6,6 +6,14 @@
  * Under MIT License
  */
 
+
+ /**
+  * This script queries the DB for a query
+  *  (calls the search function )
+  *
+  * Returns the response as JSON string
+  */
+
 ob_start();
 
 set_time_limit(60);
