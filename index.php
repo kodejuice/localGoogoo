@@ -25,7 +25,7 @@
       <!-- update alert -->
       <div style="width: 40%; position: absolute; display: none;" class="pc-only alert alert-info alert-dismissible version" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        New version available!
+        New version available! <span id='version'></span>
         <ul class='update-list'> </ul>
         <a href="http://github.com/kodejuice/localGoogoo"> [Go to Repo] </a>
       </div>

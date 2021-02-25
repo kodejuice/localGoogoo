@@ -1,9 +1,10 @@
 {
-  "version_number": 3,
- 
+  "version_number": 4,
+  "sem_ver": "v1.0.4",
+
   "changes": [
-    "Updated UI",
-    "Improved search result quality",
-    "Added version tracker"
+    "A Golang package has been released to let you search from the command line. You should check that out.",
+    "Bug fixes"
   ]
 }
+
