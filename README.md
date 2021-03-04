@@ -1,3 +1,5 @@
+> Check out <a href="https://github.com/kodejuice/localgoogoo-go"> localgoogoo-go </a>, a Go package that lets you use localGoogoo from the command line.
+
 <p align="center"> <img src="./assets/images/localGoogoo.png" alt="localGoogoo logo" border="0" /> </p>
 
 [![Build Status](https://travis-ci.org/kodejuice/localGoogoo.svg?branch=master)](https://travis-ci.org/kodejuice/localGoogoo)
@@ -6,8 +8,6 @@
 
 
 If you have the offline version of websites like ([MDN](https://developer.mozilla.org/), [W3Schools](https://w3schools.com/), [PHP.net](https://php.net/), e.t.c), then this is a must have tool for you.
-
-> Check out <a href="https://github.com/kodejuice/localgoogoo-go"> localgoogoo-go </a>, a Go package that lets you use localGoogoo from the command line.
 
 ## What is it
 
