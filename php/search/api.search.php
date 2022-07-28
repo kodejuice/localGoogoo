@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the localGoogoo project
  *
@@ -7,12 +8,12 @@
  */
 
 
- /**
-  * This script queries the DB for a query
-  *  (calls the search function )
-  *
-  * Returns the response as JSON string
-  */
+/**
+ * This script queries the DB for a query
+ *  (calls the search function )
+ *
+ * Returns the response as JSON string
+ */
 
 ob_start();
 
@@ -59,7 +60,7 @@ function search_result($db_response) {
     while ($row = $search_result->fetch_row()) {
         $r['results'][] = [
             'url' => $row[0],
-            'title' => !empty($row[1]) ? $row[1] : $url,
+            'title' => !empty($row[1]) ? $row[1] : $row[0],
             'content' => strip_tags(getDisplayContent($row[2], $query)),
         ];
     }
@@ -68,5 +69,3 @@ function search_result($db_response) {
 }
 
 echo json_encode(search_result($db_response));
-
-?>

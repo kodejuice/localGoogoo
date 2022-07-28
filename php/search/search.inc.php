@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the localGoogoo project
  *
@@ -26,9 +27,8 @@ define('RESULT_PER_PAGE', 10);
  * @return [array]             search results
  */
 
-function search($conn, $query, $startAt=0)
-{
-    $query = $conn->escape_string($query);
+function search($conn, $query, $startAt = 0) {
+    $query = $conn->escape_string(preg_quote($query));
     $startAt = $conn->escape_string($startAt);
     $limit = RESULT_PER_PAGE;
 
