@@ -3,7 +3,6 @@
 <p align="center"> <img src="./assets/images/localGoogoo.png" alt="localGoogoo logo" border="0" /> </p>
 
 [![Build Status](https://travis-ci.org/kodejuice/localGoogoo.svg?branch=master)](https://travis-ci.org/kodejuice/localGoogoo)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/32667e5ee1bd414c8e4837f096485997)](https://www.codacy.com/app/kodejuice/localGoogoo_2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kodejuice/localGoogoo&amp;utm_campaign=Badge_Grade)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md)
 
 If you have the offline version of websites like ([MDN](https://developer.mozilla.org/), [W3Schools](https://w3schools.com/), [PHP.net](https://php.net/), e.t.c), then this is a must have tool for you.
