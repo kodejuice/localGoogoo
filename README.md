@@ -6,7 +6,6 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/32667e5ee1bd414c8e4837f096485997)](https://www.codacy.com/app/kodejuice/localGoogoo_2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kodejuice/localGoogoo&amp;utm_campaign=Badge_Grade)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md)
 
-
 If you have the offline version of websites like ([MDN](https://developer.mozilla.org/), [W3Schools](https://w3schools.com/), [PHP.net](https://php.net/), e.t.c), then this is a must have tool for you.
 
 ## What is it
@@ -21,16 +20,18 @@ With localGoogoo you just crawl/index these offline websites and just with a sin
 ## Installation
 
 ### Requirements
-  * PHP: >= v7.x
-  * WebServer: Apache or Nginx
-  * Database: MySQL or MariaDB
+
+* PHP: >= v7.x
+* WebServer: Apache or Nginx
+* Database: MySQL or MariaDB
 <br><br>
 
 ```bash
-$ git clone http://github.com/kodejuice/localgoogoo.git
-$ cd localgoogoo
-$ composer install
+git clone http://github.com/kodejuice/localgoogoo.git
+cd localgoogoo
+composer install
 ```
+
 <br>
 
 Make sure the `localgoogoo` folder is placed somewhere under your local web document root. Your offline websites should also be under local web directory, localGoogoo wont be able to crawl them if they're not accessible via the `http://` protocol.
@@ -44,13 +45,13 @@ config.json
 
 ```json
 {
-	"DB_HOST": "localhost",
+ "DB_HOST": "localhost",
 
-	"DB_USER": "root",
+ "DB_USER": "root",
 
-	"DB_PASSWORD": "",
+ "DB_PASSWORD": "",
 
-	"DB_NAME": "localgoogoo"
+ "DB_NAME": "localgoogoo"
 }
 
 ```
@@ -59,7 +60,7 @@ Note: You can also setup your database information by running `./bin/localgoogoo
 
 _You don't have to manually create the database, localGoogoo automatically does that._
 
-After setup, visit (http://localhost/path/to/localgoogoo) you should see something like this:
+After setup, visit (<http://localhost/path/to/localgoogoo>) you should see something like this:
 
 ![Index Page](./screenshots/index_page.png)
 
