@@ -57,7 +57,7 @@ $crawler->onComplete(
 
         if (!$conn->query($updateCrawlTime)) {
             $msg = "Crawling complete, but failed to update crawl time";
-            $crawler->log($cralwer->logFile, "- $msg");
+            $crawler->log($crawler->logFile, "- $msg");
 
             echo PHP_EOL.$msg;
         }
@@ -75,23 +75,11 @@ $crawler->onComplete(
 
 echo PHP_EOL."Crawling website ...".PHP_EOL.PHP_EOL;
 
-
 // start crawler!
 $crawler->startCrawler(
-    function () use ($name, $url, $conn) {
+    function () use ($name, $url, $conn, $crawler) {
         // callback called as pages crawl,
-    
-        // get crawled pages count from database as we crawl
-        $getCount = $conn->query(
-            <<<sql
-        SELECT pages_count
-        FROM websites
-        WHERE site_name='$name' AND site_url='$url'
-sql
-        );
 
-        $row = $getCount->fetch_row();
-
-        echo progress(($row[0] ?? 0)." Crawled Pages");
+        echo progress($crawler->crawledPagesCount." Crawled Pages");
     }
 );
