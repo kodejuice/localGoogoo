@@ -1,10 +1,10 @@
 {
-  "version_number": 4,
-  "sem_ver": "v1.0.4",
+  "version_number": 5,
+  "sem_ver": "v1.0.5",
 
   "changes": [
-    "A Golang package has been released to let you search from the command line. You should check that out.",
-    "Bug fixes"
+    "Speed up crawling process, replace arrays with hashmaps",
+    "Fix regexp search input bug",
+    "Upgrad Google analytics tag to v4"
   ]
 }
-
