@@ -3,8 +3,8 @@
   "sem_ver": "v1.0.5",
 
   "changes": [
-    "Speed up crawling process, replace arrays with hashmaps",
+    "Speed up crawling process use hashmap to memoize data",
     "Fix regexp search input bug",
-    "Upgrad Google analytics tag to v4"
+    "Upgrade Google analytics tag to v4"
   ]
 }
