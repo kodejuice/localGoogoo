@@ -619,6 +619,10 @@ sql;
      */
     private function getPageContent($url)
     {
+        if (!isValidUrl($url)) {
+            return false;
+        }
+
         if (array_key_exists($url, $this->pageContentCache)) {
             return $this->pageContentCache[$url];
         }

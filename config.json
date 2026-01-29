@@ -5,5 +5,7 @@
 
     "DB_PASSWORD": "",
 
-    "DB_NAME": "localgoogoo"
+    "DB_NAME": "localgoogoo",
+
+    "ALLOWED_LOCALHOST_PATTERNS": ["*"]
 }
