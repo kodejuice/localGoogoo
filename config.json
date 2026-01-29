@@ -1,11 +1,11 @@
 {
-    "DB_HOST": "localhost",
-    
-    "DB_USER": "root",
+ "DB_HOST": "localhost",
 
-    "DB_PASSWORD": "",
+ "DB_USER": "root",
 
-    "DB_NAME": "localgoogoo",
+ "DB_PASSWORD": "",
 
-    "ALLOWED_LOCALHOST_PATTERNS": ["*"]
+ "DB_NAME": "localgoogoo",
+
+ "ALLOWED_LOCALHOST_PATTERNS": ["*"]
 }

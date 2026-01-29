@@ -12,6 +12,7 @@ set_time_limit(86400 * 31);
 
 const included = true;
 
+require_once __DIR__ . '/../vendor/autoload.php';
 require_once "inc/helpers.inc.php";
 require_once "inc/setup_database.inc.php";
 require_once "crawler/crawler.class.php";
