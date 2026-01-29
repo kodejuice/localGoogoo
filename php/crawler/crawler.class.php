@@ -622,7 +622,10 @@ sql;
         if (array_key_exists($url, $this->pageContentCache)) {
             return $this->pageContentCache[$url];
         }
-        $cnt = @file_get_contents($url);
+        // Use global safe getPageContent logic (which uses safeGetUrlContent)
+        // or call safeGetUrlContent directly.
+        // We'll call safeGetUrlContent directly for clarity and to get content.
+        $cnt = safeGetUrlContent($url);
         if ($cnt) {
             return $this->pageContentCache[$url] = $cnt;
         }
