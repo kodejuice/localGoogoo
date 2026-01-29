@@ -19,6 +19,8 @@ declare(strict_types=1);
 require_once __DIR__ . "/../lib/simple_html_dom.php";
 require_once __DIR__ . "/../inc/helpers.inc.php";
 
+use Smalot\PdfParser\Parser;
+
 class LGCrawler
 {
     private $siteurl;
@@ -168,19 +170,32 @@ class LGCrawler
         // remove queries
         extract(parse_url($url));
         $path = isset($path) ? $path : "/";
-        $url = ("$scheme://$host$path");
+        $portStr = isset($port) ? ":$port" : "";
+        $url = ("$scheme://$host$portStr$path");
 
-        // if (url is not 200) or (page isn't html) or (page is already cralwed), { dont crawl }
-        if (!($fileContent = $this->getPageContent($url)) || !$this->isHTML($fileContent) || array_key_exists($url, $crawledPages)) {
+        $fileContent = $this->getPageContent($url);
+        if (!$fileContent) {
+            return;
+        }
+
+        $isPdf = $this->isPDF($fileContent);
+
+        // if (url is not 200) or (page isn't html AND isn't pdf) or (page is already cralwed), { dont crawl }
+        if ((!$this->isHTML($fileContent) && !$isPdf) || array_key_exists($url, $crawledPages)) {
             return;
         }
 
         // add current page to database,
         if (!array_key_exists($url, $crawledPages)) {
             if (!array_key_exists($url, $this->crawledPagesInDB)) {
-                $this->addPageToDatabase($url, $fileContent);
+                $this->addPageToDatabase($url, $fileContent, $isPdf);
             }
             $crawledPages[$url] = 1;
+        }
+
+        // if it is a PDF, we don't extract links
+        if ($isPdf) {
+            return;
         }
 
         // will hold all links in the the current page
@@ -200,7 +215,8 @@ class LGCrawler
                 // remove queries from url
                 extract(parse_url($pageURL));
                 $path = isset($path) ? $path : "/";
-                $pageURL = ("$scheme://$host$path");
+                $portStr = isset($port) ? ":$port" : "";
+                $pageURL = ("$scheme://$host$portStr$path");
 
                 if ($this->isAlike($this->siteurl, $pageURL) && !array_key_exists($pageURL, $crawledPages)) {
                     array_push($links, $pageURL);
@@ -332,48 +348,70 @@ class LGCrawler
      *
      * @param [string] $link    page url
      * @param [string] $content page content
+     * @param [boolean] $isPdf  is it a pdf file
      *
      * @return [boolean]        page added or not
      */
-    private function addPageToDatabase($link, $content)
+    private function addPageToDatabase($link, $content, $isPdf = false)
     {
         $name = $this->sitename;
         $conn = $this->SQLConn;
 
-        $dom = str_get_html($content);
+        if ($isPdf) {
+            try {
+                $parser = new Parser();
+                $pdf = $parser->parseContent($content);
+                $text = $pdf->getText();
 
-        // check if the html object has the 'find' method,
-        // if it doesn't (false was returned) then the html content couldn't be parsed (too large)
-        // see the 'lib/simple_html_dom.php' script line 113
-        if (!is_callable([$dom, "find"], true)) {
-            $this->tooLarge = true;
-            return;
+                // Use filename as title for PDF
+                $path = parse_url($link, PHP_URL_PATH);
+                $pageTitle = basename($path);
+
+                $pageEmphasis = "";
+                $pageHeaders = "";
+                $content = $conn->escape_string($this->_trim($text));
+                $pageTitle = $conn->escape_string($pageTitle);
+                $link = $conn->escape_string($link);
+            } catch (\Exception $e) {
+                $this->log($this->logFile, "- Error parsing PDF $link: " . $e->getMessage());
+                return false;
+            }
+        } else {
+            $dom = str_get_html($content);
+
+            // check if the html object has the 'find' method,
+            // if it doesn't (false was returned) then the html content couldn't be parsed (too large)
+            // see the 'lib/simple_html_dom.php' script line 113
+            if (!is_callable([$dom, "find"], true)) {
+                $this->tooLarge = true;
+                return;
+            }
+
+            $pageTitle = isset($dom->find("title")[0]) ? $dom->find("title")[0]->innertext() : "";
+            $pageTitle = $conn->escape_string($pageTitle);
+
+            // get <body> tag from page content
+            $content = isset($dom->find("body")[0])
+                ?  $dom->find("body")[0]->innertext()
+                : $content;
+
+            // escape strings
+            $content = $conn->escape_string($this->_trim($content));
+            $link = $conn->escape_string($link);
+
+            // get dom instance here, so following methods
+            // dont need to call it again
+            $dom = str_get_html($content);
+
+            // get <strong>, <b>, <em> tags from page
+            $pageEmphasis = $this->getPageElems($dom, $content, "strong,em,b");
+
+            // get headers <h1>-<h6>
+            $pageHeaders = $this->getPageElems($dom, $content, "h1,h2,h3,h4,h5,h6");
+
+            // strip out tags and remove useless html elements
+            $content = $this->stripTags($content);
         }
-
-        $pageTitle = isset($dom->find("title")[0]) ? $dom->find("title")[0]->innertext() : "";
-        $pageTitle = $conn->escape_string($pageTitle);
-
-        // get <body> tag from page content
-        $content = isset($dom->find("body")[0])
-            ?  $dom->find("body")[0]->innertext()
-            : $content;
-
-        // escape strings
-        $content = $conn->escape_string($this->_trim($content));
-        $link = $conn->escape_string($link);
-
-        // get dom instance here, so following methods
-        // dont need to call it again
-        $dom = str_get_html($content);
-
-        // get <strong>, <b>, <em> tags from page
-        $pageEmphasis = $this->getPageElems($dom, $content, "strong,em,b");
-
-        // get headers <h1>-<h6>
-        $pageHeaders = $this->getPageElems($dom, $content, "h1,h2,h3,h4,h5,h6");
-
-        // strip out tags and remove useless html elements
-        $content = $this->stripTags($content);
 
         $sql = <<<sql
         INSERT INTO pages (page_website, page_id, page_url, page_title, page_headers, page_emphasis, page_content)
@@ -575,6 +613,18 @@ sql;
     private function isHTML($string)
     {
         return preg_match("/<html.*/i", $string) && preg_match("/<body.*/i", $string);
+    }
+
+    /**
+     * check if string is pdf
+     *
+     * @param [string] $string string to check
+     *
+     * @return [boolean]         pdf or not
+     */
+    private function isPDF($string)
+    {
+        return strpos($string, '%PDF-') === 0;
     }
 
     /**

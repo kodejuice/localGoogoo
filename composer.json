@@ -21,9 +21,10 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=7.0.0",
+        "php": ">=7.3",
         "ext-mysqli": "*",
-        "league/climate": "^3.2"
+        "league/climate": "^3.10",
+        "smalot/pdfparser": "^2.12"
     },
     "bin": ["bin/localgoogoo"],
     "version": "1.0.0"
