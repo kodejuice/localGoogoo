@@ -73,6 +73,63 @@ function _link($name, $start, $isCurrent=false)
 
 /* crawl.php, start_crawler.php */
 
+function isValidUrl($url)
+{
+    $parsed = parse_url($url);
+    if (!$parsed || !isset($parsed['scheme'])) {
+        return false;
+    }
+
+    $scheme = strtolower($parsed['scheme']);
+    if (!in_array($scheme, ['http', 'https'])) {
+        return false;
+    }
+
+    $host = $parsed['host'] ?? '';
+
+    // Check if localhost
+    $isLocal = false;
+    if (strtolower($host) === 'localhost') {
+        $isLocal = true;
+    } else {
+        $ip = gethostbyname($host);
+        // If it's a valid IP
+        if (filter_var($ip, FILTER_VALIDATE_IP)) {
+            if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+                if (strpos($ip, '127.') === 0) {
+                    $isLocal = true;
+                }
+            } elseif (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+                if ($ip === '::1') {
+                    $isLocal = true;
+                }
+            }
+        }
+    }
+
+    if ($isLocal) {
+        $configPath = __DIR__ . '/../../config.json';
+        if (file_exists($configPath)) {
+            $config = json_decode(file_get_contents($configPath), true);
+            $allowed = $config['ALLOWED_LOCALHOST_PATTERNS'] ?? [];
+
+            if (in_array('*', $allowed)) {
+                return true;
+            }
+
+            foreach ($allowed as $pattern) {
+                if (fnmatch($pattern, $url)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return false;
+    }
+
+    return true;
+}
+
 function getPageContent($url)
 {
     return ($cnt = @file_get_contents($url)) ? $cnt : 0;
@@ -82,6 +139,7 @@ function getPageContent($url)
 function isInvalid($name, $url)
 {
     return empty($name) || empty($url)
+        || !isValidUrl($url)
         || !getPageContent($url);
 }
 
@@ -140,7 +198,8 @@ function prepareConfigFile($config_file)
             'DB_HOST' => 'localhost',
             'DB_USER' => 'root',
             'DB_PASSWORD' => '',
-            'DB_NAME' => 'localgoogoo'
+            'DB_NAME' => 'localgoogoo',
+            'ALLOWED_LOCALHOST_PATTERNS' => ['*']
         ];
     
         file_put_contents($config_file, json_encode($data, JSON_PRETTY_PRINT));
